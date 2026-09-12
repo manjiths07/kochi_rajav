@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CID Moosa - Secret Investigation Bureau</title>
+    <style>
+        :root {
+            --bg-color: #1a0f00;
+            --panel-bg: #2d1803;
+            --accent-gold: #ffcc00;
+            --accent-red: #cc0000;
+            --text-color: #fff3d1;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: radial-gradient(circle, #3d2206 0%, #1a0f00 100%);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px dashed var(--accent-gold);
+            padding-bottom: 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .badge {
+            font-size: 50px;
+            margin-bottom: 5px;
+        }
+
+        header h1 {
+            color: var(--accent-gold);
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 2px 2px #000;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            color: #ff9900;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        /* Mission Briefing Section */
+        .mission-box {
+            background: var(--panel-bg);
+            border: 2px solid var(--accent-gold);
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 800px;
+            width: 100%;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+        }
+
+        .mission-box h2 {
+            color: var(--accent-gold);
+            margin-top: 0;
+            border-bottom: 1px solid #5a3908;
+            padding-bottom: 8px;
+        }
+
+        /* Suspect Grid */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .suspect-card {
+            background: var(--panel-bg);
+            border: 2px solid var(--accent-red);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            transition: transform 0.3s;
+        }
+
+        .suspect-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+        }
+
+        .photo-frame {
+            width: 100%;
+            height: 180px;
+            background: #110900;
+            border: 1px dashed var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            color: #8c6732;
+            font-size: 0.85rem;
+            overflow: hidden;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .suspect-name {
+            color: var(--accent-gold);
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .suspect-status {
+            font-size: 0.85rem;
+            color: #ff6666;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background: var(--accent-gold);
+            color: #1a0f00;
+            border: none;
+            padding: 8px 15px;
+            font-weight: bold;
+            font-family: inherit;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #ffaa00;
+            transform: scale(1.05);
+        }
+
+        .secret-stamp {
+            margin-top: 30px;
+            color: var(--accent-red);
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: 3px dashed var(--accent-red);
+            padding: 10px 20px;
+            display: inline-block;
+            transform: rotate(-3deg);
+            background: rgba(204, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="badge">🔍🕵️‍♂️</div>
+        <h1>CID MOOSA</h1>
+        <p>"Aarum Kaanathe, Aarum Ariyathe... Oru Secret Investigation!"</p>
+    </header>
+
+    <div class="mission-box">
+        <h2>📂 Case Diary #007: The Missing Dog & Secret Mission</h2>
+        <p id="mission-text">Sahodara, Sahadevanum Moosayum koode ippo oruputhiya case investigationil aanu. Nee ipozhum suspect list check cheythille? Pathram eduthu nokku!</p>
+        <button onclick="changeMission()">Secret Message Decrypt 🔓</button>
+    </div>
+
+    <div class="grid-container">
+        
+        <!-- Suspect 1 -->
+        <div class="suspect-card">
+            <div class="photo-frame">
+                <!-- <img src="sahadevan.jpg" alt="Sahadevan"> -->
+                <span>[ Insert Photo Here ]</span>
+            </div>
+            <div class="suspect-name">SI Sahadevan</div>
+            <div class="suspect-status">Status: Confused & Angry 😡</div>
+            <button onclick="interrogate('Sahadevan: Ente thala thirichu vekkalle!')">Interrogate 🔍</button>
+        </div>
+
+        <!-- Suspect 2 -->
+        <div class="suspect-card">
+            <div class="photo-frame">
+                <!-- <img src="moosa.jpg" alt="Moosa"> -->
+                <span>[ Insert Photo Here ]</span>
+            </div>
+            <div class="suspect-name">CID Moosa (Sahadevan's Nightmare)</div>
+            <div class="suspect-status">Status: Ultimate Spy 😎</div>
+            <button onclick="interrogate('Moosa: Njan oru CID aanu, enikku ellam ariyam!')">Interrogate 🔍</button>
+        </div>
+
+        <!-- Suspect 3 -->
+        <div class="suspect-card">
+            <div class="photo-frame">
+                <!-- <img src="kattappa.jpg" alt="Dog"> -->
+                <span>[ Insert Photo Here ]</span>
+            </div>
+            <div class="suspect-name">Valayar Paramasivam / Dog</div>
+            <div class="suspect-status">Status: Barking Undercover 🐕</div>
+            <button onclick="interrogate('Dog: Woof! (Case files evide ennariyaan varunne?)')">Interrogate 🔍</button>
+        </div>
+
+    </div>
+
+    <div class="secret-stamp">
+        CONFIDENTIAL - STRICTLY FOR CID AGENTS ONLY
+    </div>
+
+    <script>
+        const missions = [
+            "Sahodara, Sahadevanum Moosayum koode ippo oru puthiya case investigationil aanu.",
+            "Warning: SP office-il ninnu urgent call vannittundu. Karakk കമ്പി ഒക്കെ onnu check cheyyu!",
+            "Secret Operation: Puli Chacko-ye kandupidikkanulla mission thudangiyirikkunnu."
+        ];
+        let mIndex = 0;
+
+        function changeMission() {
+            mIndex = (mIndex + 1) % missions.length;
+            document.getElementById("mission-text").innerText = missions[mIndex];
+        }
+
+        function interrogate(dialogue) {
+            alert(dialogue);
+        }
+    </script>
+</body>
+</html>

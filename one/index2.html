@@ -1,0 +1,4142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kochi Auto Rajavu™ — Evide Eththi? AI</title>
+
+<style>
+:root{
+    --bg:#050607;
+    --panel:#0c0f11;
+    --panel2:#111619;
+    --gold:#f6c84c;
+    --gold2:#ff9f1c;
+    --red:#ff4054;
+    --green:#38e58b;
+    --blue:#55aaff;
+    --purple:#ae7aff;
+    --cyan:#46e0ff;
+    --text:#f5f5f5;
+    --muted:#899298;
+    --border:rgba(255,255,255,.09);
+    --shadow:0 25px 80px rgba(0,0,0,.5);
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Inter,Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 20% 0%,rgba(246,200,76,.08),transparent 30%),
+        radial-gradient(circle at 90% 20%,rgba(255,64,84,.06),transparent 30%),
+        var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+}
+
+button,
+input,
+textarea,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-track{
+    background:#050607;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#34383b;
+    border-radius:20px;
+}
+
+/* =========================
+   INTRO
+========================= */
+
+#intro{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:#000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    transition:opacity 1s ease,visibility 1s ease;
+}
+
+#intro.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+.intro-content{
+    text-align:center;
+    position:relative;
+    z-index:3;
+    padding:30px;
+}
+
+.intro-small{
+    color:var(--gold);
+    letter-spacing:5px;
+    font-size:11px;
+    margin-bottom:25px;
+}
+
+.intro-logo{
+    font-size:clamp(42px,8vw,100px);
+    font-weight:1000;
+    letter-spacing:-5px;
+    line-height:.9;
+}
+
+.intro-logo span{
+    color:var(--gold);
+}
+
+.intro-status{
+    margin-top:30px;
+    color:#777;
+    font-family:monospace;
+    font-size:12px;
+    min-height:18px;
+}
+
+.intro-loader{
+    width:260px;
+    height:2px;
+    background:#171717;
+    margin:22px auto;
+    overflow:hidden;
+}
+
+.intro-loader div{
+    height:100%;
+    width:0;
+    background:var(--gold);
+    animation:loadIntro 3.5s forwards;
+}
+
+@keyframes loadIntro{
+    to{width:100%}
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:100vh;
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+}
+
+.hero-video{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:0;
+    
+    filter:brightness() saturate(.85);
+    transform:scale(1.04);
+    animation:heroZoom 18s ease-in-out infinite alternate;
+}
+
+@keyframes heroZoom{
+    from{transform:scale(1.04)}
+    to{transform:scale(1.12)}
+}
+
+.hero-overlay{
+    position:absolute;
+    inset:0;
+    z-index:1;
+    background:
+        linear-gradient(90deg,
+            rgba(0,0,0,.96) 0%,
+            rgba(0,0,0,.78) 35%,
+            rgba(0,0,0,.42) 70%,
+            rgba(0,0,0,.72) 100%),
+        linear-gradient(0deg,
+            #050607 0%,
+            transparent 35%,
+            rgba(0,0,0,.25) 100%);
+}
+
+.hero-grid{
+    position:absolute;
+    inset:0;
+    z-index:1;
+    opacity:.12;
+    background-image:
+        linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);
+    background-size:60px 60px;
+}
+
+.hero-content{
+    position:relative;
+    z-index:3;
+    width:min(1250px,92%);
+    margin:auto;
+    padding:140px 0 100px;
+}
+
+.status-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 13px;
+    border:1px solid rgba(246,200,76,.3);
+    background:rgba(0,0,0,.45);
+    backdrop-filter:blur(12px);
+    color:var(--gold);
+    border-radius:100px;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.live-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#38e58b;
+    box-shadow:0 0 15px #38e58b;
+}
+
+.hero h1{
+    max-width:900px;
+    font-size:clamp(55px,9vw,130px);
+    line-height:.84;
+    letter-spacing:-7px;
+    margin:25px 0;
+    font-weight:1000;
+}
+
+.hero h1 span{
+    color:var(--gold);
+    text-shadow:0 0 50px rgba(246,200,76,.18);
+}
+
+.hero-description{
+    max-width:650px;
+    color:#b9bec0;
+    line-height:1.7;
+    font-size:16px;
+}
+
+.hero-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:30px;
+}
+
+.btn{
+    border:1px solid var(--border);
+    background:#111416;
+    color:#fff;
+    padding:13px 18px;
+    border-radius:10px;
+    font-weight:800;
+    transition:.25s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+    border-color:rgba(255,255,255,.25);
+}
+
+.btn-gold{
+    background:var(--gold);
+    color:#090909;
+    border-color:var(--gold);
+}
+
+.btn-red{
+    background:rgba(255,64,84,.12);
+    border-color:rgba(255,64,84,.4);
+    color:#ff8a96;
+}
+
+.btn-green{
+    background:rgba(56,229,139,.1);
+    border-color:rgba(56,229,139,.3);
+    color:#73efa9;
+}
+
+.video-control{
+    position:absolute;
+    bottom:25px;
+    right:25px;
+    z-index:5;
+    display:flex;
+    gap:8px;
+}
+
+.video-control button{
+    background:rgba(0,0,0,.6);
+    color:white;
+    border:1px solid rgba(255,255,255,.15);
+    padding:10px 14px;
+    border-radius:9px;
+}
+
+/* =========================
+   NAV
+========================= */
+
+.nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(5,6,7,.78);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);
+}
+
+.nav-inner{
+    width:min(1250px,94%);
+    margin:auto;
+    min-height:68px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo{
+    font-weight:1000;
+    letter-spacing:-1px;
+}
+
+.logo span{
+    color:var(--gold);
+}
+
+.nav-links{
+    display:flex;
+    gap:6px;
+    overflow-x:auto;
+}
+
+.nav-links button{
+    white-space:nowrap;
+    border:0;
+    background:transparent;
+    color:#8e969a;
+    padding:9px 11px;
+    border-radius:8px;
+    font-size:12px;
+    font-weight:800;
+}
+
+.nav-links button:hover{
+    color:white;
+    background:#15191b;
+}
+
+/* =========================
+   GENERAL
+========================= */
+
+.container{
+    width:min(1250px,92%);
+    margin:auto;
+}
+
+section{
+    padding:100px 0;
+}
+
+.section-kicker{
+    color:var(--gold);
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:12px;
+}
+
+.section-title{
+    font-size:clamp(34px,5vw,65px);
+    line-height:.95;
+    letter-spacing:-3px;
+    margin-bottom:15px;
+}
+
+.section-description{
+    max-width:700px;
+    color:var(--muted);
+    line-height:1.7;
+    margin-bottom:35px;
+}
+
+.grid{
+    display:grid;
+    gap:18px;
+}
+
+.grid-2{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.grid-3{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+.card{
+    background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.018));
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:24px;
+    box-shadow:var(--shadow);
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+
+.muted{
+    color:var(--muted);
+}
+
+/* =========================
+   RAJAVU MODE
+========================= */
+
+.rajavu-panel{
+    border:1px solid rgba(246,200,76,.2);
+    background:
+        radial-gradient(circle at 80% 20%,rgba(246,200,76,.13),transparent 35%),
+        #0c0a07;
+}
+
+.mode-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.toggle{
+    position:relative;
+    width:220px;
+    height:54px;
+    background:#151719;
+    border:1px solid #333;
+    border-radius:100px;
+    padding:5px;
+    display:flex;
+}
+
+.toggle button{
+    flex:1;
+    border:0;
+    border-radius:100px;
+    background:transparent;
+    color:#777;
+    font-weight:900;
+}
+
+.toggle button.active{
+    background:var(--gold);
+    color:#111;
+    box-shadow:0 0 25px rgba(246,200,76,.2);
+}
+
+.meter{
+    margin-top:18px;
+}
+
+.meter-top{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:7px;
+    font-size:12px;
+    font-weight:800;
+}
+
+.meter-track{
+    height:9px;
+    background:#1b2022;
+    border-radius:100px;
+    overflow:hidden;
+}
+
+.meter-fill{
+    height:100%;
+    width:0;
+    border-radius:100px;
+    transition:width 1s ease;
+    background:var(--gold);
+}
+
+.meter-fill.red{background:var(--red)}
+.meter-fill.green{background:var(--green)}
+.meter-fill.blue{background:var(--blue)}
+.meter-fill.purple{background:var(--purple)}
+
+/* =========================
+   AI
+========================= */
+
+.ai-layout{
+    display:grid;
+    grid-template-columns:380px 1fr;
+    gap:18px;
+}
+
+.form-group{
+    margin-bottom:16px;
+}
+
+.form-group label{
+    display:block;
+    color:#9da5a8;
+    font-size:11px;
+    font-weight:900;
+    margin-bottom:7px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    border:1px solid var(--border);
+    background:#080b0d;
+    color:#fff;
+    border-radius:10px;
+    padding:13px;
+    outline:none;
+}
+
+textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:rgba(246,200,76,.5);
+}
+
+.ai-screen{
+    min-height:600px;
+    position:relative;
+    overflow:hidden;
+    border-radius:18px;
+    background:
+        radial-gradient(circle at center,rgba(56,229,139,.06),transparent 45%),
+        #06090a;
+    border:1px solid var(--border);
+}
+
+.scan-grid{
+    position:absolute;
+    inset:0;
+    background-image:
+        linear-gradient(rgba(56,229,139,.04) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(56,229,139,.04) 1px,transparent 1px);
+    background-size:35px 35px;
+}
+
+.radar{
+    position:absolute;
+    width:350px;
+    height:350px;
+    border:1px solid rgba(56,229,139,.25);
+    border-radius:50%;
+    left:50%;
+    top:45%;
+    transform:translate(-50%,-50%);
+    box-shadow:
+        0 0 0 45px rgba(56,229,139,.015),
+        0 0 0 90px rgba(56,229,139,.01);
+}
+
+.radar::before,
+.radar::after{
+    content:"";
+    position:absolute;
+    background:rgba(56,229,139,.14);
+}
+
+.radar::before{
+    width:100%;
+    height:1px;
+    top:50%;
+}
+
+.radar::after{
+    width:1px;
+    height:100%;
+    left:50%;
+}
+
+.radar-line{
+    position:absolute;
+    width:50%;
+    height:2px;
+    left:50%;
+    top:50%;
+    transform-origin:left center;
+    background:linear-gradient(90deg,#38e58b,transparent);
+    animation:radarSpin 3s linear infinite;
+}
+
+@keyframes radarSpin{
+    to{transform:rotate(360deg)}
+}
+
+.auto{
+    position:absolute;
+    left:50%;
+    top:45%;
+    transform:translate(-50%,-50%);
+    font-size:85px;
+    filter:drop-shadow(0 0 25px rgba(246,200,76,.25));
+    animation:autoFloat 2s ease-in-out infinite;
+    z-index:3;
+}
+
+@keyframes autoFloat{
+    50%{transform:translate(-50%,-55%)}
+}
+
+.ai-status{
+    position:absolute;
+    top:20px;
+    left:20px;
+    right:20px;
+    display:flex;
+    justify-content:space-between;
+    gap:8px;
+    flex-wrap:wrap;
+    z-index:5;
+}
+
+.status-box{
+    background:rgba(0,0,0,.6);
+    border:1px solid rgba(255,255,255,.08);
+    padding:10px 13px;
+    border-radius:9px;
+    font-family:monospace;
+    font-size:10px;
+    color:#69efac;
+}
+
+.ai-result{
+    position:absolute;
+    bottom:20px;
+    left:20px;
+    right:20px;
+    background:rgba(5,7,8,.85);
+    backdrop-filter:blur(16px);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:15px;
+    padding:20px;
+    z-index:5;
+}
+
+.result-emoji{
+    font-size:35px;
+}
+
+.result-title{
+    font-size:27px;
+    font-weight:1000;
+    margin:6px 0;
+}
+
+.result-malayalam{
+    color:var(--gold);
+    font-weight:800;
+}
+
+.result-english{
+    color:#9ba3a7;
+    margin-top:5px;
+}
+
+.scanning .ai-screen::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    height:3px;
+    top:-5px;
+    background:var(--green);
+    box-shadow:0 0 30px var(--green);
+    animation:scanBeam 1.3s linear infinite;
+    z-index:10;
+}
+
+@keyframes scanBeam{
+    to{top:100%}
+}
+
+/* =========================
+   QUICK CASES
+========================= */
+
+.quick-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.quick{
+    padding:13px;
+    background:#101416;
+    border:1px solid var(--border);
+    color:#ddd;
+    border-radius:10px;
+    font-weight:800;
+    font-size:12px;
+    transition:.2s;
+}
+
+.quick:hover{
+    border-color:var(--gold);
+    transform:translateY(-2px);
+}
+
+/* =========================
+   ROUTE MAP
+========================= */
+
+.map{
+    min-height:500px;
+    position:relative;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 25% 35%,rgba(70,224,255,.08),transparent 25%),
+        #080b0d;
+    border:1px solid var(--border);
+    border-radius:20px;
+}
+
+.map-grid{
+    position:absolute;
+    inset:0;
+    background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+    background-size:40px 40px;
+}
+
+.route-line{
+    position:absolute;
+    left:10%;
+    right:10%;
+    top:52%;
+    height:3px;
+    background:linear-gradient(90deg,var(--blue),var(--green),var(--gold),var(--red));
+    transform:rotate(-5deg);
+    box-shadow:0 0 20px rgba(70,224,255,.2);
+}
+
+.location{
+    position:absolute;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    z-index:3;
+}
+
+.location-dot{
+    width:15px;
+    height:15px;
+    border-radius:50%;
+    background:var(--gold);
+    border:3px solid #111;
+    margin:auto;
+    box-shadow:0 0 20px rgba(246,200,76,.6);
+}
+
+.location span{
+    display:block;
+    margin-top:8px;
+    font-size:11px;
+    font-weight:900;
+    white-space:nowrap;
+}
+
+.map-auto{
+    position:absolute;
+    left:8%;
+    top:47%;
+    font-size:35px;
+    z-index:5;
+    transition:left 1.5s ease,top 1.5s ease;
+}
+
+.map-chaos{
+    position:absolute;
+    right:20px;
+    top:20px;
+    background:#0c1012;
+    border:1px solid var(--border);
+    padding:15px;
+    border-radius:12px;
+    font-family:monospace;
+    font-size:11px;
+}
+
+/* =========================
+   TRAFFIC
+========================= */
+
+.traffic{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.traffic-light{
+    width:55px;
+    height:145px;
+    padding:8px;
+    border-radius:20px;
+    background:#111;
+    border:1px solid #333;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-around;
+    align-items:center;
+}
+
+.light{
+    width:27px;
+    height:27px;
+    border-radius:50%;
+    background:#292d2e;
+}
+
+.light.active.red{background:#ff4054;box-shadow:0 0 25px #ff4054}
+.light.active.yellow{background:#f6c84c;box-shadow:0 0 25px #f6c84c}
+.light.active.green{background:#38e58b;box-shadow:0 0 25px #38e58b}
+
+.traffic-title{
+    font-size:28px;
+    font-weight:1000;
+}
+
+/* =========================
+   AMMAVAN
+========================= */
+
+.call{
+    text-align:center;
+    padding:30px;
+    background:
+        radial-gradient(circle at center,rgba(56,229,139,.1),transparent 50%),
+        #090c0d;
+}
+
+.phone-icon{
+    font-size:70px;
+    animation:ring 1s infinite;
+}
+
+@keyframes ring{
+    0%,100%{transform:rotate(0)}
+    25%{transform:rotate(-8deg)}
+    75%{transform:rotate(8deg)}
+}
+
+.call-name{
+    font-size:28px;
+    font-weight:1000;
+    margin:10px 0;
+}
+
+.call-answer{
+    margin-top:20px;
+}
+
+/* =========================
+   CINEMA
+========================= */
+
+.scene{
+    min-height:330px;
+    position:relative;
+    overflow:hidden;
+    border-radius:18px;
+    border:1px solid var(--border);
+    background:
+        linear-gradient(120deg,rgba(246,200,76,.08),transparent),
+        #0a0b0d;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:35px;
+}
+
+.scene-label{
+    position:absolute;
+    top:15px;
+    left:15px;
+    color:var(--gold);
+    font-family:monospace;
+    font-size:10px;
+}
+
+.scene-text{
+    font-size:clamp(24px,4vw,45px);
+    font-weight:1000;
+    line-height:1.05;
+}
+
+.scene-text small{
+    display:block;
+    color:#777;
+    font-size:12px;
+    font-weight:600;
+    margin-top:15px;
+}
+
+/* =========================
+   EXCUSES
+========================= */
+
+.excuse{
+    min-height:180px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-size:22px;
+    font-weight:900;
+    line-height:1.3;
+    border:1px solid rgba(246,200,76,.16);
+    background:radial-gradient(circle at center,rgba(246,200,76,.07),transparent 60%);
+}
+
+/* =========================
+   GAME
+========================= */
+
+.game{
+    position:relative;
+    height:280px;
+    overflow:hidden;
+    border-radius:18px;
+    background:
+        linear-gradient(#11191d 0 60%,#202427 60% 100%);
+    border:1px solid var(--border);
+}
+
+.game::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:40px;
+    height:3px;
+    background:repeating-linear-gradient(90deg,#fff 0 60px,transparent 60px 110px);
+    opacity:.3;
+}
+
+.player{
+    position:absolute;
+    bottom:44px;
+    left:50px;
+    font-size:40px;
+    z-index:3;
+    transition:left .08s;
+}
+
+.game-auto{
+    position:absolute;
+    right:-100px;
+    bottom:45px;
+    font-size:50px;
+}
+
+.game-auto.moving{
+    animation:autoGame 5s linear forwards;
+}
+
+@keyframes autoGame{
+    from{right:-100px}
+    to{right:110%}
+}
+
+.game-score{
+    position:absolute;
+    top:15px;
+    right:15px;
+    background:#0008;
+    padding:10px 14px;
+    border-radius:9px;
+    font-family:monospace;
+    z-index:5;
+}
+
+.game-message{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:1000;
+    font-size:28px;
+    text-align:center;
+    z-index:6;
+    pointer-events:none;
+}
+
+/* =========================
+   MEDIA ARCHIVE
+========================= */
+
+.media-card{
+    overflow:hidden;
+    padding:0;
+}
+
+.media-image,
+.media-video{
+    width:100%;
+    height:230px;
+    object-fit:cover;
+    display:block;
+    background:#080a0b;
+}
+
+.media-caption{
+    padding:16px;
+}
+
+.media-caption strong{
+    display:block;
+    margin-bottom:5px;
+}
+
+/* =========================
+   CONTROL ROOM
+========================= */
+
+.analytics{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.stat{
+    padding:22px;
+    background:#0b0f11;
+    border:1px solid var(--border);
+    border-radius:14px;
+}
+
+.stat-value{
+    font-size:38px;
+    font-weight:1000;
+    margin-top:8px;
+}
+
+.stat-label{
+    color:#737c80;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+/* =========================
+   CERTIFICATE
+========================= */
+
+.certificate{
+    padding:45px;
+    text-align:center;
+    border:2px solid rgba(246,200,76,.3);
+    background:
+        radial-gradient(circle at center,rgba(246,200,76,.09),transparent 60%),
+        #0d0c08;
+}
+
+.certificate h2{
+    font-size:42px;
+    color:var(--gold);
+}
+
+.certificate p{
+    color:#aaa;
+    line-height:1.8;
+    max-width:700px;
+    margin:15px auto;
+}
+
+/* =========================
+   WHY
+========================= */
+
+.why{
+    text-align:center;
+    padding:100px 20px;
+}
+
+.why h2{
+    font-size:clamp(40px,7vw,90px);
+    letter-spacing:-5px;
+}
+
+.why-answer{
+    min-height:45px;
+    margin-top:25px;
+    color:var(--gold);
+    font-size:20px;
+    font-weight:900;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    border-top:1px solid var(--border);
+    padding:35px 0;
+    color:#666;
+    font-size:11px;
+}
+
+.footer-inner{
+    width:min(1250px,92%);
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+#toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:9998;
+    width:min(350px,calc(100% - 40px));
+    padding:17px;
+    background:#101416;
+    border:1px solid rgba(246,200,76,.25);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    transform:translateY(120px);
+    opacity:0;
+    transition:.35s;
+}
+
+#toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+.toast-title{
+    font-weight:1000;
+    color:var(--gold);
+}
+
+.toast-text{
+    color:#9da4a7;
+    font-size:12px;
+    margin-top:5px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+    .ai-layout,
+    .grid-2{
+        grid-template-columns:1fr;
+    }
+
+    .grid-3{
+        grid-template-columns:1fr;
+    }
+
+    .analytics{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hero h1{
+        letter-spacing:-4px;
+    }
+}
+
+@media(max-width:600px){
+
+    section{
+        padding:70px 0;
+    }
+
+    .nav-inner{
+        align-items:flex-start;
+        padding:10px 0;
+        flex-direction:column;
+    }
+
+    .nav-links{
+        width:100%;
+    }
+
+    .quick-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .analytics{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .radar{
+        width:260px;
+        height:260px;
+    }
+
+    .hero-content{
+        padding-top:120px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     INTRO
+========================================================= -->
+
+<div id="intro">
+
+    <div class="intro-content">
+
+        <div class="intro-small">
+            KOCHI TRANSPORTATION INTELLIGENCE DIVISION
+        </div>
+
+        <div class="intro-logo">
+            KOCHI<br>
+            <span>AUTO RAJAVU™</span>
+        </div>
+
+        <div class="intro-status" id="introStatus">
+            INITIALIZING...
+        </div>
+
+        <div class="intro-loader">
+            <div></div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<header class="hero" id="home">
+
+    <!-- YOUR MOVIE/ENTRY VIDEO -->
+    <video
+        class="hero-video"
+        id="heroVideo"
+        autoplay
+        muted
+        loop
+        playsinline
+        poster="KOCHI.jpg">
+
+        <source src="KOCHIRAJAVU.mp4" type="video/mp4">
+
+    </video>
+
+    <div class="hero-overlay"></div>
+    <div class="hero-grid"></div>
+
+    <div class="hero-content">
+
+        <div class="status-pill">
+            <span class="live-dot"></span>
+            SYSTEM ONLINE
+        </div>
+
+        <h1>
+            KOCHI<br>
+            <span>AUTO RAJAVU™</span>
+        </h1>
+
+        <p class="hero-description">
+            Kerala's most unnecessarily advanced transportation
+            intelligence system. Predict your location, detect shortcuts,
+            simulate Kochi traffic, consult Ammavans and discover where
+            your auto actually took you.
+        </p>
+
+        <div class="hero-buttons">
+
+            <button class="btn btn-gold" onclick="startAI()">
+                🛺 START EVide ETHI? AI
+            </button>
+
+            <button class="btn" onclick="toggleRajavu()">
+                👑 ENTER RAJAVU MODE
+            </button>
+
+            <button class="btn btn-red" onclick="scrollToSection('game')">
+                🎮 CATCH THE AUTO
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="video-control">
+
+        <button onclick="toggleHeroVideo()" id="videoBtn">
+            🔇 Video Audio
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     NAV
+========================================================= -->
+
+<nav class="nav">
+
+    <div class="nav-inner">
+
+        <div class="logo">
+            🛺 <span>KOCHI AUTO RAJAVU™</span>
+        </div>
+
+        <div class="nav-links">
+
+            <button onclick="scrollToSection('ai')">🛺 AI</button>
+            <button onclick="scrollToSection('rajavu')">👑 RAJAVU</button>
+            <button onclick="scrollToSection('map')">🗺️ MAP</button>
+            <button onclick="scrollToSection('cinema')">🎬 CINEMA</button>
+            <button onclick="scrollToSection('game')">🎮 GAME</button>
+            <button onclick="scrollToSection('archive')">📸 ARCHIVE</button>
+            <button onclick="scrollToSection('control')">📊 CONTROL</button>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<main>
+
+
+<!-- =========================================================
+     RAJAVU MODE
+========================================================= -->
+
+<section id="rajavu">
+
+<div class="container">
+
+<div class="section-kicker">01 / Cinematic Intelligence</div>
+
+<h2 class="section-title">
+RAJAVU MODE
+</h2>
+
+<p class="section-description">
+A completely unnecessary mode that increases cinematic energy
+while simultaneously reducing common sense.
+</p>
+
+<div class="card rajavu-panel">
+
+    <div class="mode-row">
+
+        <div>
+
+            <h3>👑 Kochi Rajavu Protocol</h3>
+
+            <p class="muted">
+                Activate only when normal transportation
+                is no longer dramatic enough.
+            </p>
+
+        </div>
+
+        <div class="toggle">
+
+            <button
+                id="normalMode"
+                class="active"
+                onclick="setMode('normal')">
+
+                NORMAL
+
+            </button>
+
+            <button
+                id="rajavuMode"
+                onclick="setMode('rajavu')">
+
+                👑 RAJAVU
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="grid grid-2" style="margin-top:30px">
+
+        <div>
+
+            <div class="meter">
+
+                <div class="meter-top">
+                    <span>RAJAVU ENERGY</span>
+                    <span id="rajavuEnergyText">12%</span>
+                </div>
+
+                <div class="meter-track">
+                    <div
+                        id="rajavuEnergyBar"
+                        class="meter-fill"
+                        style="width:12%">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="meter">
+
+                <div class="meter-top">
+                    <span>KOCHI MASS</span>
+                    <span id="kochiMassText">43%</span>
+                </div>
+
+                <div class="meter-track">
+                    <div
+                        id="kochiMassBar"
+                        class="meter-fill red"
+                        style="width:43%">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="meter">
+
+                <div class="meter-top">
+                    <span>COMMON SENSE</span>
+                    <span id="commonSenseText">21%</span>
+                </div>
+
+                <div class="meter-track">
+                    <div
+                        id="commonSenseBar"
+                        class="meter-fill green"
+                        style="width:21%">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>🎵 Cinematic Audio Engine</h3>
+
+            <p class="muted">
+                Audio automatically changes according to
+                the current transportation crisis.
+            </p>
+
+            <div style="margin-top:20px;display:flex;gap:8px;flex-wrap:wrap">
+
+                <button class="btn" onclick="playBGM('normal')">
+                    🌴 Normal
+                </button>
+
+                <button class="btn" onclick="playBGM('mass')">
+                    👑 Mass
+                </button>
+
+                <button class="btn" onclick="playBGM('suspense')">
+                    🚨 Suspense
+                </button>
+
+                <button class="btn" onclick="playBGM('comedy')">
+                    😂 Comedy
+                </button>
+
+                <button class="btn" onclick="playBGM('rain')">
+                    🌧️ Rain
+                </button>
+
+            </div>
+
+            <div style="margin-top:20px">
+
+                <label class="muted">
+                    BGM VOLUME
+                </label>
+
+                <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step=".01"
+                    value=".45"
+                    oninput="setVolume(this.value)">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     AI
+========================================================= -->
+
+<section id="ai">
+
+<div class="container">
+
+<div class="section-kicker">02 / Navigation Intelligence</div>
+
+<h2 class="section-title">
+EVide ETHI? AI™
+</h2>
+
+<p class="section-description">
+Tell the system where you started, where you intended to go,
+and what the driver did. The AI will make an extremely confident
+guess.
+</p>
+
+
+<div class="ai-layout">
+
+
+<!-- FORM -->
+
+<div class="card">
+
+<div class="form-group">
+
+<label>Started From</label>
+
+<select id="from">
+
+<option>Kollam</option>
+<option>Karunagappally</option>
+<option>Kayamkulam</option>
+<option>Alappuzha</option>
+<option>Kottayam</option>
+<option>Changanassery</option>
+<option>Ernakulam</option>
+<option>Fort Kochi</option>
+<option>Thrissur</option>
+<option>Kozhikode</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Destination</label>
+
+<select id="destination">
+
+<option>Fort Kochi</option>
+<option>Mattancherry</option>
+<option>Kaloor</option>
+<option>Edappally</option>
+<option>Vyttila</option>
+<option>Kakkanad</option>
+<option>Aluva</option>
+<option>Ernakulam</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Situation</label>
+
+<select id="situation">
+
+<option>Driver said "shortcut und"</option>
+<option>Driver took a random turn</option>
+<option>Road looked unfamiliar</option>
+<option>Google Maps stopped working</option>
+<option>Driver asked someone for directions</option>
+<option>I have completely lost track</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Weather</label>
+
+<select id="weather">
+
+<option>Normal Kerala Day</option>
+<option>Heavy Rain</option>
+<option>Extreme Heat</option>
+<option>Monsoon Chaos</option>
+<option>Unexpected Fog</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Your Story</label>
+
+<textarea
+id="story"
+placeholder="Example: Driver said shortcut und and now we have passed three temples..."></textarea>
+
+</div>
+
+
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+
+<button class="btn btn-gold" onclick="runAI()">
+🧠 ANALYSE
+</button>
+
+<button class="btn" onclick="randomCase()">
+🎲 RANDOM
+</button>
+
+<button class="btn" onclick="speakResult()">
+🎙️ SPEAK
+</button>
+
+</div>
+
+</div>
+
+
+<!-- AI SCREEN -->
+
+<div
+class="ai-screen"
+id="aiScreen">
+
+<div class="scan-grid"></div>
+
+<div class="radar">
+
+<div class="radar-line"></div>
+
+</div>
+
+<div class="auto">
+🛺
+</div>
+
+
+<div class="ai-status">
+
+<div class="status-box" id="gpsStatus">
+GPS: WAITING
+</div>
+
+<div class="status-box" id="shortcutStatus">
+SHORTCUT: UNKNOWN
+</div>
+
+<div class="status-box" id="realityStatus">
+REALITY: STABLE
+</div>
+
+</div>
+
+
+<div class="ai-result">
+
+<div class="result-emoji" id="resultEmoji">
+❓
+</div>
+
+<div class="result-title" id="resultTitle">
+Waiting for a cinematic crisis...
+</div>
+
+<div
+class="result-malayalam"
+id="resultMalayalam">
+AI is ready.
+</div>
+
+<div
+class="result-english"
+id="resultEnglish">
+Press Analyse to discover your extremely inaccurate location.
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- METERS -->
+
+<div class="grid grid-3" style="margin-top:18px">
+
+<div class="card">
+
+<div class="meter-top">
+<span>CONFIDENCE</span>
+<span id="confidenceText">0%</span>
+</div>
+
+<div class="meter-track">
+<div id="confidenceBar" class="meter-fill green"></div>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="meter-top">
+<span>CONFUSION</span>
+<span id="confusionText">0%</span>
+</div>
+
+<div class="meter-track">
+<div id="confusionBar" class="meter-fill red"></div>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="meter-top">
+<span>SHORTCUT</span>
+<span id="shortcutText">0%</span>
+</div>
+
+<div class="meter-track">
+<div id="shortcutBar" class="meter-fill"></div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- QUICK CASES -->
+
+<div style="margin-top:30px">
+
+<h3 style="margin-bottom:15px">
+Quick Kerala Situations
+</h3>
+
+<div class="quick-grid">
+
+<button class="quick" onclick="quickCase('shortcut')">
+⚡ Shortcut Und
+</button>
+
+<button class="quick" onclick="quickCase('lost')">
+💀 Totally Lost
+</button>
+
+<button class="quick" onclick="quickCase('temple')">
+🛕 Passed 4 Temples
+</button>
+
+<button class="quick" onclick="quickCase('wedding')">
+💍 Wedding Route
+</button>
+
+<button class="quick" onclick="quickCase('rain')">
+🌧️ Monsoon Mode
+</button>
+
+<button class="quick" onclick="quickCase('ammavan')">
+👴 Ammavan Directions
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     MAP
+========================================================= -->
+
+<section id="map">
+
+<div class="container">
+
+<div class="section-kicker">03 / Route Simulation</div>
+
+<h2 class="section-title">
+KOCHI ROUTE SIMULATOR
+</h2>
+
+<p class="section-description">
+Expected route versus what the auto actually decided to do.
+</p>
+
+
+<div class="map">
+
+<div class="map-grid"></div>
+
+<div class="route-line"></div>
+
+
+<div class="location" style="left:10%;top:47%">
+<div class="location-dot"></div>
+<span>Fort Kochi</span>
+</div>
+
+
+<div class="location" style="left:27%;top:44%">
+<div class="location-dot"></div>
+<span>Mattancherry</span>
+</div>
+
+
+<div class="location" style="left:44%;top:48%">
+<div class="location-dot"></div>
+<span>Kaloor</span>
+</div>
+
+
+<div class="location" style="left:61%;top:46%">
+<div class="location-dot"></div>
+<span>Edappally</span>
+</div>
+
+
+<div class="location" style="left:78%;top:52%">
+<div class="location-dot"></div>
+<span>Vyttila</span>
+</div>
+
+
+<div class="location" style="left:91%;top:48%">
+<div class="location-dot"></div>
+<span>Kakkanad</span>
+</div>
+
+
+<div
+class="map-auto"
+id="mapAuto">
+🛺
+</div>
+
+
+<div class="map-chaos">
+
+<div>ROUTE STATUS</div>
+
+<strong id="routeStatus">
+NORMAL
+</strong>
+
+<br><br>
+
+TRAFFIC:
+<span id="trafficText">MODERATE</span>
+
+<br>
+
+SHORTCUT:
+<span id="mapShortcut">12%</span>
+
+</div>
+
+</div>
+
+
+<div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+
+<button class="btn btn-gold" onclick="runRoute()">
+🗺️ START JOURNEY
+</button>
+
+<button class="btn" onclick="createShortcut()">
+⚠️ FORCE SHORTCUT
+</button>
+
+</div>
+
+
+<div class="grid grid-2" style="margin-top:18px">
+
+<div class="card">
+
+<div class="traffic">
+
+<div class="traffic-light">
+
+<div id="lightRed" class="light"></div>
+<div id="lightYellow" class="light"></div>
+<div id="lightGreen" class="light"></div>
+
+</div>
+
+<div>
+
+<div class="traffic-title" id="trafficLevel">
+KOCHI
+</div>
+
+<p class="muted" id="trafficReason">
+Traffic engine waiting...
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>🚦 Current ETA</h3>
+
+<div
+id="eta"
+style="font-size:45px;font-weight:1000;color:var(--gold);margin-top:10px">
+12 min
+</div>
+
+<p class="muted">
+AI corrected ETA may be significantly less accurate.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     AMMAVAN
+========================================================= -->
+
+<section id="ammavan">
+
+<div class="container">
+
+<div class="section-kicker">04 / Human GPS</div>
+
+<h2 class="section-title">
+AMMAVAN GPS™
+</h2>
+
+<p class="section-description">
+The only navigation system that uses landmarks that may no longer exist.
+</p>
+
+
+<div class="grid grid-2">
+
+<div class="card call">
+
+<div class="phone-icon">
+📞
+</div>
+
+<div class="call-name">
+AMMAVAN
+</div>
+
+<div class="muted">
+Incoming navigation consultation...
+</div>
+
+<div class="call-answer">
+
+<button
+class="btn btn-green"
+onclick="answerAmmavan()">
+ANSWER CALL
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>📡 Ammavan Navigation Intelligence</h3>
+
+<div
+id="ammavanText"
+style="font-size:20px;font-weight:800;line-height:1.5;margin-top:20px">
+“Call Ammavan. He knows the road.”
+</div>
+
+<div
+class="meter"
+style="margin-top:25px">
+
+<div class="meter-top">
+<span>ACCURACY</span>
+<span id="ammavanAccuracy">4%</span>
+</div>
+
+<div class="meter-track">
+<div
+class="meter-fill red"
+style="width:4%"
+id="ammavanBar">
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     CINEMA
+========================================================= -->
+
+<section id="cinema">
+
+<div class="container">
+
+<div class="section-kicker">05 / Cinematic Engine</div>
+
+<h2 class="section-title">
+CINEMA SCENE GENERATOR
+</h2>
+
+<p class="section-description">
+Turn completely normal Kerala situations into unnecessarily dramatic
+cinematic events.
+</p>
+
+
+<div class="grid grid-2">
+
+<div class="card">
+
+<h3>Choose your crisis</h3>
+
+<div style="display:grid;gap:8px;margin-top:18px">
+
+<button class="quick" onclick="generateScene('exam')">
+ചേട്ടാ ഒന്ന് വേഗം പോകുവോ .ഇതു ജെറ്റ് ഒന്നും അല്ലടീ പുലേ😂
+</button>
+
+<button class="quick" onclick="generateScene('wedding')">
+ചേട്ടാ ഒട്ടം പോകുവോ?
+</button>
+
+<button class="quick" onclick="generateScene('airport')">
+Kuttyde peru enthuva?🫠
+</button>
+
+<button class="quick" onclick="generateScene('rain')">
+200 രൂപയോ അത് ഇത്തിരി കൂടുതാൽ അല്ലേ ചേട്ടാ☠️🫤
+</button>
+
+<button class="quick" onclick="generateScene('midnight')">
+Autoku Entha chetta 3 tyre?
+</button>
+
+</div>
+
+</div>
+
+
+<div class="scene" id="scene">
+
+<div class="scene-label">
+CINEMATIC SCENE ENGINE / STANDBY
+</div>
+
+<div class="scene-text" id="sceneText">
+
+PRESS A SCENARIO
+
+<small>
+The system is waiting for unnecessary drama.
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     EXCUSE GENERATOR
+========================================================= -->
+
+<section id="excuse">
+
+<div class="container">
+
+<div class="section-kicker">06 / Emergency Communication</div>
+
+<h2 class="section-title">
+KERALA EXCUSE GENERATOR
+</h2>
+
+<p class="section-description">
+For situations where the truth is technically available but
+not recommended.
+</p>
+
+
+<div class="grid grid-2">
+
+<div class="card">
+
+<div style="display:grid;gap:9px">
+
+<button class="quick" onclick="generateExcuse('college')">
+🎓 College
+</button>
+
+<button class="quick" onclick="generateExcuse('school')">
+🏫 School
+</button>
+
+<button class="quick" onclick="generateExcuse('parents')">
+👨‍👩‍👦 Parents
+</button>
+
+<button class="quick" onclick="generateExcuse('friend')">
+🧑 Friend
+</button>
+
+<button class="quick" onclick="generateExcuse('teacher')">
+👨‍🏫 Teacher
+</button>
+
+<button class="quick" onclick="generateExcuse('boss')">
+💼 Boss
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card excuse" id="excuseOutput">
+
+Your emergency excuse will appear here.
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     GAME
+========================================================= -->
+
+<section id="game">
+
+<div class="container">
+
+<div class="section-kicker">07 / Transportation Survival</div>
+
+<h2 class="section-title">
+DON'T MISS THE AUTO
+</h2>
+
+<p class="section-description">
+Use the keyboard to catch the auto. Because apparently this
+also needed to be a game.
+</p>
+
+
+<div class="game" id="gameArea">
+
+<div class="game-score">
+SCORE: <span id="gameScore">0</span>
+</div>
+
+<div class="player" id="player">
+🏃
+</div>
+
+<div
+class="game-auto"
+id="gameAuto">
+🛺
+</div>
+
+<div
+class="game-message"
+id="gameMessage">
+PRESS START
+</div>
+
+</div>
+
+
+<div style="margin-top:15px;display:flex;gap:10px">
+
+<button class="btn btn-gold" onclick="startGame()">
+🎮 START GAME
+</button>
+
+<button class="btn" onclick="jump()">
+SPACE / JUMP
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     MEDIA ARCHIVE
+========================================================= -->
+
+<section id="archive">
+
+<div class="container">
+
+<div class="section-kicker">08 / Fan Archive</div>
+
+<h2 class="section-title">
+KOCHI RAJAVU ARCHIVE
+</h2>
+
+<p class="section-description">
+Your personal image and video slots. Replace these files with
+your own media.
+</p>
+
+
+<div class="grid grid-3">
+
+
+<div class="card media-card">
+
+<img
+class="media-image"
+src="ko.jpg"
+alt="Kochi archive image"
+onerror="this.style.display='none'">
+
+<div class="media-caption">
+
+<strong>🎞️ KOCHI MEMORY 01</strong>
+
+<span class="muted">
+Replace with your own image.
+</span>
+
+</div>
+
+</div>
+
+
+<div class="card media-card">
+
+<img
+class="media-image"
+src="ok.jpg"
+alt="Kochi archive image"
+onerror="this.style.display='none'">
+
+<div class="media-caption">
+
+<strong>📸 KOCHI MEMORY 02</strong>
+
+<span class="muted">
+Replace with your own image.
+</span>
+
+</div>
+
+</div>
+
+
+<div class="card media-card">
+
+<img
+class="media-image"
+src="jaga.jpg"
+alt="Kochi archive image"
+onerror="this.style.display='none'">
+
+<div class="media-caption">
+
+<strong>📸 KOCHI MEMORY 03</strong>
+
+<span class="muted">
+Replace with your own image.
+</span>
+
+</div>
+
+</div>
+
+
+<div class="card media-card">
+
+<video
+class="media-video"
+controls
+poster="">
+
+<source
+src="adichu.mp4"
+type="video/mp4">
+
+</video>
+
+<div class="media-caption">
+
+<strong>ഓട്ടോ ഡ്രൈവറിൻ്റെ ഓട്ടീര് കാണുന്ന Pro rider ചങ്ക്😂</strong>
+
+<span class="muted">
+skilled rider.
+
+</span>
+
+</div>
+
+</div>
+
+
+<div class="card media-card">
+
+<video
+class="media-video"
+controls
+poster="media/kochi-02.jpg">
+
+<source
+src="achuma.mp4"
+type="video/mp4">
+
+</video>
+
+<div class="media-caption">
+
+<strong>കോഴി ചങ്ക് ഓട്ടോ ഡ്രൈവർ ആയ🐔</strong>
+
+<span class="muted">
+adi vagum kure
+</span>
+
+</div>
+
+</div>
+
+
+<div class="card media-card">
+
+<video
+class="media-video"
+controls>
+
+<source
+src="kohi.mp4"
+type="video/mp4">
+
+</video>
+
+<div class="media-caption">
+
+<strong>ഓട്ടോ ഡ്രൈവറോട് rate കൂടുതൽ ആണ് എന്ന് പറയു😮‍💨</strong>
+
+<span class="muted">
+Entha mwonee ingane.
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     AUDIO ENGINE
+========================================================= -->
+
+<section id="audio">
+
+<div class="container">
+
+<div class="section-kicker">09 / Audio Intelligence</div>
+
+<h2 class="section-title">
+DYNAMIC BGM ENGINE
+</h2>
+
+<p class="section-description">
+The soundtrack reacts to the level of transportation disaster.
+</p>
+
+
+<div class="card">
+
+<div class="grid grid-3">
+
+<button class="btn" onclick="playBGM('normal')">
+🌴 NORMAL
+</button>
+
+<button class="btn" onclick="playBGM('mass')">
+👑 RAJAVU MASS
+</button>
+
+<button class="btn" onclick="playBGM('suspense')">
+🚨 SHORTCUT
+</button>
+
+<button class="btn" onclick="playBGM('comedy')">
+😂 COMEDY
+</button>
+
+<button class="btn" onclick="playBGM('rain')">
+🌧️ MONSOON
+</button>
+
+<button class="btn btn-red" onclick="stopBGM()">
+🔇 STOP AUDIO
+</button>
+
+</div>
+
+<div style="margin-top:25px">
+
+<div class="meter-top">
+<span>MASTER VOLUME</span>
+<span id="volumeText">45%</span>
+</div>
+
+<input
+type="range"
+min="0"
+max="1"
+step=".01"
+value=".45"
+oninput="setVolume(this.value)">
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     CONTROL ROOM
+========================================================= -->
+
+<section id="control">
+
+<div class="container">
+
+<div class="section-kicker">10 / Central Intelligence</div>
+
+<h2 class="section-title">
+CONTROL ROOM
+</h2>
+
+<p class="section-description">
+A dashboard showing statistics nobody requested.
+</p>
+
+
+<div class="analytics">
+
+<div class="stat">
+
+<div class="stat-label">
+Trips analysed
+</div>
+
+<div
+class="stat-value"
+id="tripCount">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-label">
+Shortcut detections
+</div>
+
+<div
+class="stat-value"
+id="shortcutCount">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-label">
+Cinema scenes
+</div>
+
+<div
+class="stat-value"
+id="sceneCount">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-label">
+Actual usefulness
+</div>
+
+<div
+class="stat-value"
+style="color:var(--red)">
+0.03%
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card" style="margin-top:18px">
+
+<h3>📡 System Activity</h3>
+
+<div
+id="activityLog"
+style="
+margin-top:15px;
+font-family:monospace;
+font-size:11px;
+line-height:2;
+color:#899298;
+max-height:230px;
+overflow:auto;
+">
+
+[ SYSTEM ] Kochi Auto Rajavu™ initialized.
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     CERTIFICATE
+========================================================= -->
+
+<section id="certificate">
+
+<div class="container">
+
+<div class="certificate">
+
+<div class="section-kicker">
+FINAL DOCUMENTATION
+</div>
+
+<h2>
+🏆 CERTIFICATE OF KOCHI AUTO SURVIVAL™
+</h2>
+
+<p id="certificateText">
+
+This certifies that the passenger has successfully survived
+an unnecessarily complicated Kerala auto journey.
+
+</p>
+
+<div class="grid grid-3" style="margin:25px auto;max-width:800px">
+
+<div class="stat">
+<div class="stat-label">Driver Confidence</div>
+<div class="stat-value" id="certDriver">99%</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">GPS Accuracy</div>
+<div class="stat-value" id="certGPS">12%</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">Logic</div>
+<div class="stat-value" style="color:var(--red)">0%</div>
+</div>
+
+</div>
+
+<button class="btn btn-gold" onclick="generateCertificate()">
+🎖️ GENERATE CERTIFICATE
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     WHY
+========================================================= -->
+
+<section class="why">
+
+<div class="container">
+
+<div class="section-kicker">
+THE FINAL QUESTION
+</div>
+
+<h2>
+WHY DID WE<br>
+BUILD THIS?
+</h2>
+
+<div
+class="why-answer"
+id="whyAnswer">
+Nobody knows.
+</div>
+
+<button
+class="btn btn-gold"
+style="margin-top:25px"
+onclick="whyAgain()">
+
+💀 FIND OUT
+
+</button>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+<div class="footer-inner">
+
+<div>
+🛺 KOCHI AUTO RAJAVU™
+</div>
+
+<div>
+Fan-made parody / unofficial project
+</div>
+
+<div>
+GPS not required • Logic not guaranteed • 0% useful
+</div>
+
+</div>
+
+</footer>
+
+
+<!-- TOAST -->
+
+<div id="toast">
+
+<div
+class="toast-title"
+id="toastTitle">
+SYSTEM
+</div>
+
+<div
+class="toast-text"
+id="toastText">
+Ready.
+</div>
+
+</div>
+
+
+<!-- =========================================================
+     AUDIO
+========================================================= -->
+
+<audio id="bgmNormal" loop>
+<source src="_Munthiri_Paadam_Bgm_Kochi_Rajavu_Ringtone_(by Fringster.com).mp3" type="audio/mpeg">
+</audio>
+
+<audio id="bgmMass" loop>
+<source src="och.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="bgmSuspense" loop>
+<source src="raja.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="bgmComedy" loop>
+<source src="dileep_ringtone_1.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="bgmRain" loop>
+<source src="ran.mp3" type="audio/mpeg">
+</audio>
+
+
+<script>
+
+/* =========================================================
+   GLOBAL STATE
+========================================================= */
+
+let rajavu = false;
+
+let volume = .45;
+
+let trips = 0;
+let shortcuts = 0;
+let scenes = 0;
+
+let currentVerdict = "";
+
+const locations = [
+    "Fort Kochi",
+    "Mattancherry",
+    "Kaloor",
+    "Edappally",
+    "Vyttila",
+    "Kakkanad",
+    "Aluva",
+    "Thrippunithura",
+    "Ernakulam",
+    "Somewhere Near Kochi"
+];
+
+const verdicts = [
+
+    {
+        emoji:"🗿",
+        title:"YOU ARE SOMEWHERE",
+        malayalam:"Nee ippo evide aanennu chodichaal AI-kku polum ariyilla.",
+        english:"The system has detected a location. It refuses to elaborate."
+    },
+
+    {
+        emoji:"⚡",
+        title:"SHORTCUT DETECTED",
+        malayalam:"Auto chettan shortcut eduthittundu. Destination same aanu... route mathram secret aanu.",
+        english:"The driver knows the route. The AI does not."
+    },
+
+    {
+        emoji:"😂",
+        title:"DRIVER HAS SPOKEN",
+        malayalam:"'Eththi.' Athu mathi. Location chodikkanda.",
+        english:"You have technically arrived somewhere."
+    },
+
+    {
+        emoji:"🧭",
+        title:"GPS HAS LOST HOPE",
+        malayalam:"GPS parayunnathu oru vazhi. Auto pokunnathu vere vazhi.",
+        english:"Two navigation systems. Zero agreement."
+    },
+
+    {
+        emoji:"🌴",
+        title:"EMOTIONAL DISTANCE DETECTED",
+        malayalam:"Ningal technically lost alla. Destinationum ningalum thammil emotional distance und.",
+        english:"You are not lost. You are geographically confused."
+    },
+
+    {
+        emoji:"👴",
+        title:"DRIVER CONFIDENCE: DANGEROUS",
+        malayalam:"Road familiar alla. Driver confident aanu. Athukondu everything is probably fine.",
+        english:"The driver appears extremely confident."
+    },
+
+    {
+        emoji:"🛺",
+        title:"TRANSPORTATION → TOURISM",
+        malayalam:"10 minute journey 37 minute aayi. Ithu transport alla. Tourism aanu.",
+        english:"Your trip has officially become a sightseeing tour."
+    }
+
+];
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+const introMessages = [
+    "INITIALIZING KOCHI AUTO INTELLIGENCE...",
+    "CONNECTING TO IMAGINARY GPS...",
+    "CALIBRATING DRIVER CONFIDENCE...",
+    "DETECTING SHORTCUTS...",
+    "COMMON SENSE NOT FOUND...",
+    "SYSTEM READY."
+];
+
+let introIndex = 0;
+
+const introStatus = document.getElementById("introStatus");
+
+const introInterval = setInterval(()=>{
+
+    introStatus.textContent =
+        introMessages[introIndex % introMessages.length];
+
+    introIndex++;
+
+},550);
+
+setTimeout(()=>{
+
+    clearInterval(introInterval);
+
+    document.getElementById("intro").classList.add("hide");
+
+},3900);
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function clamp(value,min,max){
+    return Math.max(min,Math.min(max,value));
+}
+
+function random(arr){
+    return arr[Math.floor(Math.random()*arr.length)];
+}
+
+function scrollToSection(id){
+
+    document.getElementById(id)?.scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+function toast(title,text){
+
+    const box = document.getElementById("toast");
+
+    document.getElementById("toastTitle").textContent = title;
+
+    document.getElementById("toastText").textContent = text;
+
+    box.classList.add("show");
+
+    setTimeout(()=>{
+        box.classList.remove("show");
+    },3500);
+
+}
+
+function log(text){
+
+    const logBox =
+        document.getElementById("activityLog");
+
+    const time =
+        new Date().toLocaleTimeString();
+
+    logBox.innerHTML +=
+        `<br>[ ${time} ] ${text}`;
+
+    logBox.scrollTop =
+        logBox.scrollHeight;
+
+}
+
+
+/* =========================================================
+   HERO VIDEO
+========================================================= */
+
+function toggleHeroVideo(){
+
+    const video =
+        document.getElementById("heroVideo");
+
+    const button =
+        document.getElementById("videoBtn");
+
+    if(video.muted){
+
+        video.muted = false;
+
+        button.textContent = "🔊 Video Audio";
+
+        toast(
+            "🎬 AUDIO ENABLED",
+            "Cinematic mode activated."
+        );
+
+    }else{
+
+        video.muted = true;
+
+        button.textContent = "🔇 Video Audio";
+
+    }
+
+}
+
+
+/* =========================================================
+   RAJAVU MODE
+========================================================= */
+
+function setMode(mode){
+
+    rajavu = mode === "rajavu";
+
+    const normal =
+        document.getElementById("normalMode");
+
+    const raj =
+        document.getElementById("rajavuMode");
+
+    normal.classList.toggle(
+        "active",
+        !rajavu
+    );
+
+    raj.classList.toggle(
+        "active",
+        rajavu
+    );
+
+    if(rajavu){
+
+        setMeter("rajavuEnergy",97);
+
+        setMeter("kochiMass",100);
+
+        setMeter("commonSense",4);
+
+        playBGM("mass");
+
+        toast(
+            "👑 RAJAVU MODE",
+            "Kochi has acknowledged your presence."
+        );
+
+        document.body.style.setProperty(
+            "--gold",
+            "#ffd34e"
+        );
+
+    }else{
+
+        setMeter("rajavuEnergy",12);
+
+        setMeter("kochiMass",43);
+
+        setMeter("commonSense",21);
+
+        playBGM("normal");
+
+        toast(
+            "NORMAL MODE",
+            "Transportation restored."
+        );
+
+    }
+
+    log(
+        rajavu
+        ? "👑 Rajavu Protocol activated."
+        : "🛺 Normal transportation restored."
+    );
+
+}
+
+function toggleRajavu(){
+
+    setMode(
+        rajavu
+        ? "normal"
+        : "rajavu"
+    );
+
+}
+
+function setMeter(name,value){
+
+    const bar =
+        document.getElementById(name+"Bar");
+
+    const text =
+        document.getElementById(name+"Text");
+
+    if(bar) bar.style.width = value+"%";
+
+    if(text) text.textContent = value+"%";
+
+}
+
+
+/* =========================================================
+   BGM
+========================================================= */
+
+const tracks = {
+
+    normal:
+        document.getElementById("bgmNormal"),
+
+    mass:
+        document.getElementById("bgmMass"),
+
+    suspense:
+        document.getElementById("bgmSuspense"),
+
+    comedy:
+        document.getElementById("bgmComedy"),
+
+    rain:
+        document.getElementById("bgmRain")
+
+};
+
+function setVolume(value){
+
+    volume = Number(value);
+
+    Object.values(tracks).forEach(track=>{
+        track.volume = volume;
+    });
+
+    document.getElementById("volumeText").textContent =
+        Math.round(volume*100)+"%";
+
+}
+
+function stopBGM(){
+
+    Object.values(tracks).forEach(track=>{
+        track.pause();
+        track.currentTime = 0;
+    });
+
+    toast(
+        "🔇 AUDIO OFF",
+        "The cinematic universe is now silent."
+    );
+
+}
+
+function playBGM(type){
+
+    Object.values(tracks).forEach(track=>{
+
+        track.pause();
+
+        track.currentTime = 0;
+
+    });
+
+    const selected = tracks[type];
+
+    if(!selected) return;
+
+    selected.volume = volume;
+
+    selected.play().catch(()=>{
+
+        log("🔇 Browser blocked autoplay. Click audio control.");
+
+    });
+
+}
+
+
+/* =========================================================
+   AI
+========================================================= */
+
+function startAI(){
+
+    scrollToSection("ai");
+
+    setTimeout(runAI,700);
+
+}
+
+function runAI(){
+
+    const screen =
+        document.getElementById("aiScreen");
+
+    screen.parentElement.classList.add("scanning");
+
+    document.getElementById("gpsStatus").textContent =
+        "GPS: SCANNING";
+
+    document.getElementById("shortcutStatus").textContent =
+        "SHORTCUT: ANALYSING";
+
+    document.getElementById("realityStatus").textContent =
+        "REALITY: QUESTIONABLE";
+
+    document.getElementById("resultTitle").textContent =
+        "Scanning Kochi...";
+
+    document.getElementById("resultEmoji").textContent =
+        "📡";
+
+    document.getElementById("resultMalayalam").textContent =
+        "Oru nimisham...";
+
+    document.getElementById("resultEnglish").textContent =
+        "The AI is pretending to know where you are.";
+
+    log("🧠 Navigation analysis started.");
+
+    playBGM("suspense");
+
+    setTimeout(()=>{
+
+        generateVerdict();
+
+        screen.parentElement.classList.remove("scanning");
+
+    },2500);
+
+}
+
+function generateVerdict(){
+
+    const situation =
+        document.getElementById("situation").value;
+
+    const weather =
+        document.getElementById("weather").value;
+
+    const destination =
+        document.getElementById("destination").value;
+
+    let confidence =
+        Math.floor(Math.random()*40)+50;
+
+    let confusion =
+        Math.floor(Math.random()*35)+50;
+
+    let shortcut =
+        Math.floor(Math.random()*60)+25;
+
+    if(
+        situation.includes("shortcut")
+        ||
+        situation.includes("random turn")
+    ){
+
+        shortcut += 25;
+        confusion += 10;
+
+    }
+
+    if(
+        weather.includes("Rain")
+        ||
+        weather.includes("Monsoon")
+    ){
+
+        confusion += 15;
+
+    }
+
+    if(
+        situation.includes("lost")
+    ){
+
+        confusion += 25;
+        confidence -= 15;
+
+    }
+
+    confidence = clamp(confidence,5,99);
+
+    confusion = clamp(confusion,5,99);
+
+    shortcut = clamp(shortcut,5,99);
+
+    const verdict = random(verdicts);
+
+    const location = random(locations);
+
+    currentVerdict =
+        `${verdict.title} — ${location}`;
+
+    document.getElementById("resultEmoji").textContent =
+        verdict.emoji;
+
+    document.getElementById("resultTitle").textContent =
+        verdict.title + " — " + location;
+
+    document.getElementById("resultMalayalam").textContent =
+        verdict.malayalam;
+
+    document.getElementById("resultEnglish").textContent =
+        verdict.english +
+        " Destination: " +
+        destination;
+
+    updateAIBar(
+        "confidence",
+        confidence
+    );
+
+    updateAIBar(
+        "confusion",
+        confusion
+    );
+
+    updateAIBar(
+        "shortcut",
+        shortcut
+    );
+
+    document.getElementById("gpsStatus").textContent =
+        "GPS: " + confidence + "%";
+
+    document.getElementById("shortcutStatus").textContent =
+        "SHORTCUT: " + shortcut + "%";
+
+    document.getElementById("realityStatus").textContent =
+        confusion > 80
+        ? "REALITY: LOST"
+        : "REALITY: STABLE";
+
+    trips++;
+
+    document.getElementById("tripCount").textContent =
+        trips;
+
+    if(shortcut > 70){
+
+        shortcuts++;
+
+        document.getElementById("shortcutCount").textContent =
+            shortcuts;
+
+        playBGM("suspense");
+
+    }else{
+
+        playBGM(
+            rajavu
+            ? "mass"
+            : "normal"
+        );
+
+    }
+
+    document.getElementById("certDriver").textContent =
+        (95+Math.floor(Math.random()*5))+"%";
+
+    document.getElementById("certGPS").textContent =
+        confidence+"%";
+
+    log(
+        `📍 Predicted ${location} | confidence ${confidence}%`
+    );
+
+    log(
+        `⚠ Shortcut probability ${shortcut}%`
+    );
+
+    toast(
+        "🛺 ANALYSIS COMPLETE",
+        "AI has reached a conclusion."
+    );
+
+}
+
+function updateAIBar(name,value){
+
+    document.getElementById(
+        name+"Text"
+    ).textContent = value+"%";
+
+    document.getElementById(
+        name+"Bar"
+    ).style.width = value+"%";
+
+}
+
+
+/* =========================================================
+   QUICK CASES
+========================================================= */
+
+const quickCases = {
+
+    shortcut:{
+        situation:"Driver said \"shortcut und\"",
+        story:"Driver confidently said shortcut und and took a completely unfamiliar road.",
+        weather:"Normal Kerala Day"
+    },
+
+    lost:{
+        situation:"I have completely lost track",
+        story:"I have no idea where I am. The road is unfamiliar. The driver looks completely confident.",
+        weather:"Normal Kerala Day"
+    },
+
+    temple:{
+        situation:"Road looked unfamiliar",
+        story:"We have passed four temples, two rubber plantations and a shop selling pazhampori.",
+        weather:"Normal Kerala Day"
+    },
+
+    wedding:{
+        situation:"Driver took a random turn",
+        story:"The auto suddenly entered a road full of decorations and there appears to be a wedding happening.",
+        weather:"Normal Kerala Day"
+    },
+
+    rain:{
+        situation:"Road looked unfamiliar",
+        story:"Heavy rain started and I can no longer identify any landmarks.",
+        weather:"Monsoon Chaos"
+    },
+
+    ammavan:{
+        situation:"Driver asked someone for directions",
+        story:"An Ammavan gave directions using three landmarks that may no longer exist.",
+        weather:"Normal Kerala Day"
+    }
+
+};
+
+function quickCase(type){
+
+    const data = quickCases[type];
+
+    if(!data) return;
+
+    document.getElementById("situation").value =
+        data.situation;
+
+    document.getElementById("story").value =
+        data.story;
+
+    document.getElementById("weather").value =
+        data.weather;
+
+    runAI();
+
+}
+
+function randomCase(){
+
+    const key =
+        random(Object.keys(quickCases));
+
+    quickCase(key);
+
+}
+
+
+/* =========================================================
+   VOICE
+========================================================= */
+
+function speakResult(){
+
+    const text =
+        document.getElementById("resultMalayalam").textContent
+        +
+        ". "
+        +
+        document.getElementById("resultEnglish").textContent;
+
+    if("speechSynthesis" in window){
+
+        const speech =
+            new SpeechSynthesisUtterance(text);
+
+        speech.rate = .9;
+
+        speech.pitch = .8;
+
+        speechSynthesis.cancel();
+
+        speechSynthesis.speak(speech);
+
+    }else{
+
+        toast(
+            "VOICE UNAVAILABLE",
+            "Your browser does not support speech."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   MAP
+========================================================= */
+
+function runRoute(){
+
+    const auto =
+        document.getElementById("mapAuto");
+
+    const positions = [
+        "10%",
+        "27%",
+        "44%",
+        "61%",
+        "78%",
+        "91%"
+    ];
+
+    let index = 0;
+
+    log("🗺️ Route simulation started.");
+
+    function move(){
+
+        if(index >= positions.length){
+
+            document.getElementById("routeStatus")
+                .textContent =
+                "ARRIVED... PROBABLY";
+
+            document.getElementById("eta")
+                .textContent =
+                "??? min";
+
+            toast(
+                "🏁 JOURNEY COMPLETE",
+                "You reached the intended region."
+            );
+
+            return;
+        }
+
+        auto.style.left =
+            positions[index];
+
+        index++;
+
+        setTimeout(move,1200);
+
+    }
+
+    move();
+
+}
+
+function createShortcut(){
+
+    shortcuts++;
+
+    document.getElementById("shortcutCount").textContent =
+        shortcuts;
+
+    const auto =
+        document.getElementById("mapAuto");
+
+    auto.style.top =
+        (35+Math.random()*30)+"%";
+
+    document.getElementById("routeStatus")
+        .textContent =
+        "SHORTCUT DETECTED";
+
+    document.getElementById("mapShortcut")
+        .textContent =
+        Math.floor(70+Math.random()*30)+"%";
+
+    document.getElementById("trafficText")
+        .textContent =
+        "CONFUSED";
+
+    playBGM("suspense");
+
+    log("⚠️ Auto has abandoned the expected route.");
+
+    toast(
+        "⚠️ SHORTCUT",
+        "Driver says everything is under control."
+    );
+
+}
+
+
+/* =========================================================
+   TRAFFIC
+========================================================= */
+
+function updateTraffic(){
+
+    const levels = [
+
+        {
+            name:"EMPTY",
+            reason:"Nobody appears to be on the road.",
+            color:"green"
+        },
+
+        {
+            name:"MODERATE",
+            reason:"Normal Kochi behaviour detected.",
+            color:"yellow"
+        },
+
+        {
+            name:"KOCHI",
+            reason:"Several vehicles have stopped for unknown reasons.",
+            color:"red"
+        },
+
+        {
+            name:"WHY?",
+            reason:"The traffic engine has lost all scientific credibility.",
+            color:"red"
+        }
+
+    ];
+
+    const level =
+        random(levels);
+
+    document.getElementById("trafficLevel")
+        .textContent =
+        level.name;
+
+    document.getElementById("trafficReason")
+        .textContent =
+        level.reason;
+
+    document.getElementById("trafficText")
+        .textContent =
+        level.name;
+
+    document.getElementById("lightRed")
+        .classList.remove("active","red");
+
+    document.getElementById("lightYellow")
+        .classList.remove("active","yellow");
+
+    document.getElementById("lightGreen")
+        .classList.remove("active","green");
+
+    if(level.color === "green"){
+
+        document.getElementById("lightGreen")
+            .classList.add("active","green");
+
+        document.getElementById("eta").textContent =
+            "9 min";
+
+    }else if(level.color === "yellow"){
+
+        document.getElementById("lightYellow")
+            .classList.add("active","yellow");
+
+        document.getElementById("eta").textContent =
+            "17 min";
+
+    }else{
+
+        document.getElementById("lightRed")
+            .classList.add("active","red");
+
+        document.getElementById("eta").textContent =
+            "43 min";
+
+    }
+
+}
+
+setInterval(updateTraffic,5000);
+
+updateTraffic();
+
+
+/* =========================================================
+   AMMAVAN
+========================================================= */
+
+const ammavanLines = [
+
+    "Aa roadil ninn left eduthal mathi.",
+    "Oru valiya building kazhinjittu oru ambalam und.",
+    "Ninte auto driverodu chodicha mathi.",
+    "Nee avide ethiyal enne vilikk.",
+    "Google Maps venda. Enikku ariyam.",
+    "Aa shopinte opposite ulloru road aanu."
+
+];
+
+function answerAmmavan(){
+
+    const line =
+        random(ammavanLines);
+
+    document.getElementById("ammavanText")
+        .textContent =
+        "👴 Ammavan: \"" + line + "\"";
+
+    const accuracy =
+        Math.floor(Math.random()*15)+1;
+
+    document.getElementById("ammavanAccuracy")
+        .textContent =
+        accuracy+"%";
+
+    document.getElementById("ammavanBar")
+        .style.width =
+        accuracy+"%";
+
+    log("👴 Ammavan GPS consulted.");
+
+    playBGM("comedy");
+
+    toast(
+        "📞 CALL CONNECTED",
+        "Ammavan has provided directions."
+    );
+
+}
+
+
+/* =========================================================
+   CINEMA SCENES
+========================================================= */
+
+const scenesData = {
+
+    exam:{
+        title:"THE EXAMINATION ARC",
+        text:"Hero enters auto.<br><small>DRIVER: \"Shortcut und.\"<br>AI: THIS IS HOW THE PROBLEM STARTED.</small>"
+    },
+
+    wedding:{
+        title:"THE WEDDING MISSION",
+        text:"Auto turns into a decorated road.<br><small>MISSION OBJECTIVE: Find the destination. Also avoid accidentally attending the wedding.</small>"
+    },
+
+    airport:{
+        title:"THE AIRPORT RUSH",
+        text:"ETA: 17 MINUTES.<br><small>AI CORRECTION: 63 MINUTES. DRIVER CONFIDENCE: 100%.</small>"
+    },
+
+    rain:{
+        title:"MONSOON CINEMA",
+        text:"Rain begins.<br><small>Road visibility: 14%. Cinematic value: 100%.</small>"
+    },
+
+    midnight:{
+        title:"THE LAST RIDE",
+        text:"It is 11:57 PM.<br><small>One auto remains. This is no longer transportation. This is destiny.</small>"
+    }
+
+};
+
+function generateScene(type){
+
+    const data =
+        scenesData[type];
+
+    if(!data) return;
+
+    const scene =
+        document.getElementById("scene");
+
+    document.getElementById("sceneText")
+        .innerHTML =
+        data.text;
+
+    scene.animate(
+        [
+            {
+                opacity:.2,
+                transform:"scale(.98)"
+            },
+            {
+                opacity:1,
+                transform:"scale(1)"
+            }
+        ],
+        {
+            duration:700,
+            easing:"ease-out"
+        }
+    );
+
+    scenes++;
+
+    document.getElementById("sceneCount")
+        .textContent =
+        scenes;
+
+    playBGM(
+        type === "rain"
+        ? "rain"
+        : "mass"
+    );
+
+    log(
+        "🎬 Cinema scene generated: "
+        + data.title
+    );
+
+}
+
+
+/* =========================================================
+   EXCUSES
+========================================================= */
+
+const excuses = {
+
+    college:[
+        "Sir, auto chettan shortcut eduthu. Njan ethiyathu vere districtil aanu.",
+        "Traffic alla sir. Navigation situation aayirunnu.",
+        "Sir, njan late alla. Auto aanu early departure eduthathu.",
+        "Sir, Google Mapsum driverum thammil disagreement undayi."
+    ],
+
+    school:[
+        "Teacher, bus kandappol bus enne kandilla.",
+        "Roadil oru unexpected transportation event undayi.",
+        "Auto chettan paranju five minutes. Scientific five minutes aayirunnu.",
+        "Njan varunnundayirunnu. Location mathram clear alla."
+    ],
+
+    parents:[
+        "Njan veetilekku varunnundayirunnu. Route oru little cinematic aayi.",
+        "Phone battery undayirunnu. Network aanu poyath.",
+        "Njan late alla. Time aanu vegam poyath.",
+        "Auto chettan oru shortcut kandupidichu."
+    ],
+
+    friend:[
+        "Bro, njan actually varunnundayirunnu.",
+        "Location send cheyyan pattilla. Enikkum ariyilla.",
+        "Bro, driver is currently writing his own story.",
+        "5 minute enn paranjathu Kerala 5 minute aanu."
+    ],
+
+    teacher:[
+        "Sir, navigation error occurred.",
+        "Sir, driver confidence exceeded GPS confidence.",
+        "Sir, I was physically moving toward class. Geographically, no.",
+        "Sir, I encountered a shortcut."
+    ],
+
+    boss:[
+        "Traffic conditions were statistically unreasonable.",
+        "The navigation system and driver disagreed.",
+        "There was an unexpected Kochi transportation incident.",
+        "I was on the way. The route had other plans."
+    ]
+
+};
+
+function generateExcuse(type){
+
+    const list =
+        excuses[type];
+
+    document.getElementById("excuseOutput")
+        .textContent =
+        "\"" + random(list) + "\"";
+
+    playBGM("comedy");
+
+    log(
+        "😂 Emergency excuse generated."
+    );
+
+}
+
+
+/* =========================================================
+   GAME
+========================================================= */
+
+let gameRunning = false;
+
+let playerX = 50;
+
+let score = 0;
+
+function startGame(){
+
+    gameRunning = true;
+
+    score = 0;
+
+    playerX = 50;
+
+    document.getElementById("gameScore")
+        .textContent =
+        score;
+
+    document.getElementById("player")
+        .style.left =
+        playerX+"px";
+
+    document.getElementById("gameMessage")
+        .textContent =
+        "";
+
+    const auto =
+        document.getElementById("gameAuto");
+
+    auto.classList.remove("moving");
+
+    void auto.offsetWidth;
+
+    auto.classList.add("moving");
+
+    playBGM("comedy");
+
+    log("🎮 Auto survival game started.");
+
+    setTimeout(()=>{
+
+        if(gameRunning){
+
+            gameRunning = false;
+
+            document.getElementById("gameMessage")
+                .textContent =
+                "💀 AUTO MISSED";
+
+            toast(
+                "AUTO MISSED",
+                "Your cinematic journey has ended."
+            );
+
+        }
+
+    },5000);
+
+}
+
+function jump(){
+
+    if(!gameRunning) return;
+
+    const player =
+        document.getElementById("player");
+
+    player.style.transform =
+        "translateY(-80px)";
+
+    setTimeout(()=>{
+
+        player.style.transform =
+            "translateY(0)";
+
+    },450);
+
+}
+
+document.addEventListener(
+    "keydown",
+    e=>{
+
+        if(e.key === "ArrowLeft"){
+
+            playerX =
+                clamp(playerX-25,0,window.innerWidth-80);
+
+            document.getElementById("player")
+                .style.left =
+                playerX+"px";
+
+        }
+
+        if(e.key === "ArrowRight"){
+
+            playerX =
+                clamp(playerX+25,0,window.innerWidth-80);
+
+            document.getElementById("player")
+                .style.left =
+                playerX+"px";
+
+        }
+
+        if(e.code === "Space"){
+
+            e.preventDefault();
+
+            jump();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CERTIFICATE
+========================================================= */
+
+function generateCertificate(){
+
+    const confidence =
+        Math.floor(95+Math.random()*5);
+
+    const gps =
+        Math.floor(5+Math.random()*30);
+
+    document.getElementById("certDriver")
+        .textContent =
+        confidence+"%";
+
+    document.getElementById("certGPS")
+        .textContent =
+        gps+"%";
+
+    document.getElementById("certificateText")
+        .textContent =
+        `This certifies that the passenger successfully survived
+        an unnecessarily complicated Kerala auto journey.
+        Driver confidence was ${confidence}% while GPS accuracy
+        was only ${gps}%.`;
+
+    toast(
+        "🏆 CERTIFICATE GENERATED",
+        "You survived the Kochi Auto Rajavu system."
+    );
+
+    log(
+        "🏆 Survival certificate generated."
+    );
+
+}
+
+
+/* =========================================================
+   WHY
+========================================================= */
+
+const whyAnswers = [
+
+    "Someone said: \"Shortcut und.\"",
+
+    "We had a laptop.",
+
+    "Nobody stopped us.",
+
+    "It started as a normal auto ride.",
+
+    "We accidentally created transportation AI.",
+
+    "This could have been a calculator.",
+
+    "Because a normal website was not enough.",
+
+    "Science demanded this.",
+    
+    "There was absolutely no reason."
+
+];
+
+function whyAgain(){
+
+    document.getElementById("whyAnswer")
+        .textContent =
+        random(whyAnswers);
+
+    playBGM("comedy");
+
+}
+
+
+/* =========================================================
+   KEYBOARD SHORTCUTS
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    e=>{
+
+        if(
+            e.target.tagName === "INPUT" ||
+            e.target.tagName === "TEXTAREA" ||
+            e.target.tagName === "SELECT"
+        ) return;
+
+        if(e.key.toLowerCase() === "a"){
+
+            startAI();
+
+        }
+
+        if(e.key.toLowerCase() === "r"){
+
+            randomCase();
+
+        }
+
+        if(e.key.toLowerCase() === "j"){
+
+            toggleRajavu();
+
+        }
+
+    }
+);
+
+
+
+setTimeout(()=>{
+
+    log("🛺 System online.");
+
+    log("📡 Imaginary GPS connected.");
+
+    log("👑 Rajavu protocol available.");
+
+    log("⚠️ Common sense unavailable.");
+
+},4000);
+
+</script> 
+
+</body>
+</html>

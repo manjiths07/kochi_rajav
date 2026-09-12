@@ -1,0 +1,2068 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ammavan Stock Market™</title>
+
+<style>
+:root{
+    --bg:#050608;
+    --panel:#0d1015;
+    --panel2:#11151c;
+    --border:#252b35;
+    --text:#f4f6f8;
+    --muted:#7d8794;
+    --gold:#f5c451;
+    --green:#35e58a;
+    --red:#ff4d62;
+    --blue:#4da6ff;
+    --purple:#a970ff;
+    --orange:#ff9f43;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:
+        radial-gradient(circle at 15% 10%,rgba(245,196,81,.08),transparent 25%),
+        radial-gradient(circle at 85% 20%,rgba(77,166,255,.07),transparent 25%),
+        var(--bg);
+    color:var(--text);
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    min-height:100vh;
+}
+
+/* ================= HEADER ================= */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    height:72px;
+    border-bottom:1px solid var(--border);
+    background:rgba(5,6,8,.88);
+    backdrop-filter:blur(18px);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 35px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logoIcon{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background:linear-gradient(135deg,var(--gold),#8d6410);
+    display:grid;
+    place-items:center;
+    color:#111;
+    font-size:22px;
+    box-shadow:0 0 25px rgba(245,196,81,.18);
+}
+
+.logoText h1{
+    font-size:18px;
+    letter-spacing:-.5px;
+}
+
+.logoText span{
+    font-size:10px;
+    color:var(--gold);
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.marketStatus{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:12px;
+    color:var(--muted);
+}
+
+.statusDot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 12px var(--green);
+}
+
+/* ================= MAIN ================= */
+
+main{
+    max-width:1450px;
+    margin:auto;
+    padding:35px;
+}
+
+.hero{
+    border:1px solid var(--border);
+    background:
+        linear-gradient(135deg,rgba(245,196,81,.07),transparent 45%),
+        var(--panel);
+    border-radius:24px;
+    padding:35px;
+    margin-bottom:25px;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero:after{
+    content:"AMMAVAN EXCHANGE";
+    position:absolute;
+    right:-35px;
+    bottom:-15px;
+    font-size:80px;
+    font-weight:900;
+    color:rgba(255,255,255,.018);
+    pointer-events:none;
+}
+
+.heroTop{
+    display:flex;
+    justify-content:space-between;
+    gap:30px;
+    align-items:flex-start;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:7px 11px;
+    border:1px solid rgba(245,196,81,.25);
+    border-radius:100px;
+    color:var(--gold);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    background:rgba(245,196,81,.05);
+}
+
+.hero h2{
+    font-size:clamp(32px,5vw,65px);
+    line-height:.95;
+    margin:18px 0;
+    letter-spacing:-3px;
+}
+
+.hero h2 span{
+    color:var(--gold);
+}
+
+.hero p{
+    max-width:650px;
+    color:var(--muted);
+    line-height:1.7;
+}
+
+.heroWarning{
+    min-width:250px;
+    border:1px solid rgba(255,77,98,.25);
+    background:rgba(255,77,98,.05);
+    border-radius:16px;
+    padding:18px;
+}
+
+.heroWarning strong{
+    color:var(--red);
+    display:block;
+    margin-bottom:7px;
+}
+
+.heroWarning small{
+    color:var(--muted);
+    line-height:1.5;
+}
+
+/* ================= DASHBOARD ================= */
+
+.grid{
+    display:grid;
+    grid-template-columns:1.4fr .8fr;
+    gap:22px;
+}
+
+.panel{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.panelHeader{
+    padding:18px 20px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.panelTitle{
+    font-weight:700;
+}
+
+.panelSubtitle{
+    font-size:11px;
+    color:var(--muted);
+    margin-top:4px;
+}
+
+.panelBody{
+    padding:20px;
+}
+
+/* ================= MARKET TABLE ================= */
+
+.marketTable{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.marketTable th{
+    text-align:left;
+    color:var(--muted);
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    padding:12px 10px;
+    border-bottom:1px solid var(--border);
+}
+
+.marketTable td{
+    padding:16px 10px;
+    border-bottom:1px solid rgba(255,255,255,.045);
+}
+
+.marketTable tr{
+    transition:.2s;
+}
+
+.marketTable tbody tr:hover{
+    background:rgba(255,255,255,.025);
+}
+
+.stockName{
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.stockIcon{
+    width:36px;
+    height:36px;
+    border-radius:10px;
+    display:grid;
+    place-items:center;
+    background:var(--panel2);
+    border:1px solid var(--border);
+    font-size:17px;
+}
+
+.stockSymbol{
+    font-size:10px;
+    color:var(--muted);
+    margin-top:3px;
+}
+
+.price{
+    font-weight:700;
+}
+
+.up{
+    color:var(--green);
+}
+
+.down{
+    color:var(--red);
+}
+
+.tradeButtons{
+    display:flex;
+    gap:6px;
+}
+
+button{
+    border:0;
+    cursor:pointer;
+    font-family:inherit;
+}
+
+.tradeButtons button{
+    padding:7px 11px;
+    border-radius:7px;
+    font-size:10px;
+    font-weight:700;
+}
+
+.buy{
+    color:#06140d;
+    background:var(--green);
+}
+
+.sell{
+    color:white;
+    background:var(--red);
+}
+
+.tradeButtons button:hover{
+    transform:translateY(-1px);
+    filter:brightness(1.1);
+}
+
+/* ================= PORTFOLIO ================= */
+
+.balance{
+    font-size:34px;
+    font-weight:800;
+    margin:8px 0;
+    letter-spacing:-1px;
+}
+
+.balanceLabel{
+    color:var(--muted);
+    font-size:11px;
+}
+
+.pnlBox{
+    padding:13px;
+    background:var(--panel2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    margin-top:15px;
+}
+
+.pnlLabel{
+    font-size:10px;
+    color:var(--muted);
+}
+
+.pnlValue{
+    font-size:19px;
+    font-weight:700;
+    margin-top:5px;
+}
+
+/* ================= PORTFOLIO HOLDINGS ================= */
+
+.holding{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.holding:last-child{
+    border-bottom:0;
+}
+
+.holdingName{
+    font-weight:600;
+    font-size:13px;
+}
+
+.holdingQty{
+    color:var(--muted);
+    font-size:10px;
+    margin-top:3px;
+}
+
+.holdingValue{
+    text-align:right;
+    font-weight:700;
+    font-size:13px;
+}
+
+/* ================= CHART ================= */
+
+.chartBox{
+    height:220px;
+    position:relative;
+    padding:10px;
+}
+
+canvas{
+    width:100%;
+    height:100%;
+}
+
+/* ================= AMMAVAN COMMENTARY ================= */
+
+.commentary{
+    background:
+        linear-gradient(135deg,rgba(169,112,255,.08),transparent),
+        var(--panel);
+}
+
+.ammavanFace{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(135deg,#302414,#17130c);
+    border:1px solid rgba(245,196,81,.25);
+    font-size:36px;
+    margin-bottom:15px;
+}
+
+.quote{
+    font-size:19px;
+    line-height:1.5;
+    font-weight:700;
+}
+
+.quote span{
+    color:var(--gold);
+}
+
+.quoteMeta{
+    color:var(--muted);
+    font-size:10px;
+    margin-top:12px;
+}
+
+/* ================= NEWS ================= */
+
+.newsList{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.news{
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:13px;
+    background:var(--panel2);
+}
+
+.newsTag{
+    font-size:9px;
+    text-transform:uppercase;
+    color:var(--gold);
+    letter-spacing:1px;
+}
+
+.newsText{
+    font-size:12px;
+    margin-top:5px;
+    line-height:1.5;
+}
+
+/* ================= BIG CONTROLS ================= */
+
+.controlGrid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-top:22px;
+}
+
+.actionBtn{
+    min-height:100px;
+    border-radius:17px;
+    padding:18px;
+    color:white;
+    text-align:left;
+    border:1px solid var(--border);
+    background:var(--panel);
+    transition:.25s;
+}
+
+.actionBtn:hover{
+    transform:translateY(-3px);
+    border-color:var(--gold);
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+.actionIcon{
+    font-size:24px;
+    margin-bottom:10px;
+}
+
+.actionTitle{
+    font-weight:800;
+}
+
+.actionDesc{
+    font-size:10px;
+    color:var(--muted);
+    margin-top:4px;
+}
+
+/* ================= TRANSACTIONS ================= */
+
+.transaction{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:13px 0;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    font-size:12px;
+}
+
+.transaction:last-child{
+    border-bottom:0;
+}
+
+.transaction small{
+    display:block;
+    color:var(--muted);
+    margin-top:3px;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(8px);
+    z-index:500;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modalBox{
+    width:min(500px,100%);
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:25px;
+    box-shadow:0 30px 100px rgba(0,0,0,.6);
+}
+
+.modalTitle{
+    font-size:24px;
+    font-weight:800;
+}
+
+.modalSub{
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.6;
+    margin:8px 0 20px;
+}
+
+.modalActions{
+    display:flex;
+    gap:10px;
+}
+
+.modalActions button{
+    flex:1;
+    padding:13px;
+    border-radius:10px;
+    font-weight:700;
+}
+
+.confirm{
+    background:var(--gold);
+    color:#111;
+}
+
+.cancel{
+    background:var(--panel2);
+    color:white;
+    border:1px solid var(--border);
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#11151c;
+    border:1px solid var(--border);
+    border-left:3px solid var(--gold);
+    padding:14px 18px;
+    border-radius:12px;
+    min-width:260px;
+    z-index:1000;
+    transform:translateY(120px);
+    opacity:0;
+    transition:.3s;
+    box-shadow:0 15px 50px rgba(0,0,0,.5);
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+.toastTitle{
+    font-weight:800;
+    font-size:12px;
+}
+
+.toastText{
+    font-size:11px;
+    color:var(--muted);
+    margin-top:4px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    text-align:center;
+    padding:40px 20px 25px;
+    color:var(--muted);
+    font-size:10px;
+    line-height:1.7;
+}
+
+footer strong{
+    color:var(--gold);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:950px){
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .heroTop{
+        flex-direction:column;
+    }
+
+    .heroWarning{
+        width:100%;
+    }
+}
+
+@media(max-width:700px){
+    header{
+        padding:0 15px;
+    }
+
+    .marketStatus{
+        display:none;
+    }
+
+    main{
+        padding:18px;
+    }
+
+    .hero{
+        padding:24px;
+    }
+
+    .hero h2{
+        letter-spacing:-2px;
+    }
+
+    .controlGrid{
+        grid-template-columns:1fr;
+    }
+
+    .marketTable th:nth-child(3),
+    .marketTable td:nth-child(3){
+        display:none;
+    }
+
+    .tradeButtons{
+        flex-direction:column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <div class="logoIcon">👨‍🦳</div>
+
+        <div class="logoText">
+            <h1>Ammavan Stock Market™</h1>
+            <span>Unnecessary Financial Intelligence</span>
+        </div>
+    </div>
+
+    <div class="marketStatus">
+        <span class="statusDot"></span>
+        MARKET OPEN
+        <span id="clock">00:00:00</span>
+    </div>
+</header>
+
+
+<main>
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="heroTop">
+
+        <div>
+            <div class="badge">● Fake Market Terminal</div>
+
+            <h2>
+                Invest in your<br>
+                <span>future Ammavan.</span>
+            </h2>
+
+            <p>
+                A completely unnecessary stock market where you can
+                trade Kerala's most valuable assets: government jobs,
+                Gulf dreams, marriage pressure, engineering degrees
+                and family reputation.
+            </p>
+        </div>
+
+        <div class="heroWarning">
+            <strong>⚠ FINANCIAL DISCLAIMER</strong>
+            <small>
+                This is not a real stock market.
+                No money is involved.
+                Your Ammavan may still judge your investment decisions.
+            </small>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<div class="grid">
+
+<!-- MARKET -->
+
+<section class="panel">
+
+    <div class="panelHeader">
+        <div>
+            <div class="panelTitle">Kerala Market</div>
+            <div class="panelSubtitle">
+                Live prices • Absolutely fake
+            </div>
+        </div>
+
+        <div class="badge">LIVE</div>
+    </div>
+
+    <div class="panelBody">
+
+        <table class="marketTable">
+
+            <thead>
+                <tr>
+                    <th>Asset</th>
+                    <th>Price</th>
+                    <th>24H</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="marketBody"></tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- PORTFOLIO -->
+
+<section class="panel">
+
+    <div class="panelHeader">
+        <div>
+            <div class="panelTitle">My Portfolio</div>
+            <div class="panelSubtitle">Your imaginary wealth</div>
+        </div>
+    </div>
+
+    <div class="panelBody">
+
+        <div class="balanceLabel">
+            TOTAL PORTFOLIO VALUE
+        </div>
+
+        <div class="balance" id="portfolioValue">
+            ₹10,000
+        </div>
+
+        <div class="pnlBox">
+            <div class="pnlLabel">
+                TODAY'S P&L
+            </div>
+
+            <div class="pnlValue up" id="pnl">
+                +₹0
+            </div>
+        </div>
+
+        <br>
+
+        <div class="panelSubtitle">
+            HOLDINGS
+        </div>
+
+        <div id="holdings"></div>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<!-- ================= CHART ================= -->
+
+<section class="panel" style="margin-top:22px">
+
+    <div class="panelHeader">
+
+        <div>
+            <div class="panelTitle">
+                Ammavan Market Index
+            </div>
+
+            <div class="panelSubtitle">
+                AMMAVAN-100 • Historical data that never existed
+            </div>
+        </div>
+
+        <div id="indexValue" class="up">
+            +2.41%
+        </div>
+
+    </div>
+
+    <div class="chartBox">
+        <canvas id="chart"></canvas>
+    </div>
+
+</section>
+
+
+<!-- ================= COMMENTARY + NEWS ================= -->
+
+<div class="grid" style="margin-top:22px">
+
+<section class="panel commentary">
+
+    <div class="panelHeader">
+        <div>
+            <div class="panelTitle">
+                🧠 Ammavan Intelligence
+            </div>
+
+            <div class="panelSubtitle">
+                Market commentary from someone who owns three LIC policies
+            </div>
+        </div>
+    </div>
+
+    <div class="panelBody">
+
+        <div class="ammavanFace">
+            👨‍🦳
+        </div>
+
+        <div class="quote" id="ammavanQuote">
+            “Government job stock is always safe.
+            Don't listen to these startup people.”
+        </div>
+
+        <div class="quoteMeta">
+            — Senior Market Analyst • Local Ammavan • 47 years experience
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="panel">
+
+    <div class="panelHeader">
+        <div>
+            <div class="panelTitle">📰 Market News</div>
+            <div class="panelSubtitle">Breaking family intelligence</div>
+        </div>
+    </div>
+
+    <div class="panelBody">
+
+        <div class="newsList" id="newsList"></div>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<!-- ================= ACTIONS ================= -->
+
+<div class="controlGrid">
+
+    <button class="actionBtn" onclick="marketCrash()">
+        <div class="actionIcon">📉</div>
+        <div class="actionTitle">Market Crash</div>
+        <div class="actionDesc">
+            Destroy everyone's imaginary wealth.
+        </div>
+    </button>
+
+
+    <button class="actionBtn" onclick="marketBoom()">
+        <div class="actionIcon">🚀</div>
+        <div class="actionTitle">Artificial Bull Run</div>
+        <div class="actionDesc">
+            Make everything unnecessarily expensive.
+        </div>
+    </button>
+
+
+    <button class="actionBtn" onclick="manipulateMarket()">
+        <div class="actionIcon">🕴️</div>
+        <div class="actionTitle">Ammavan Manipulation</div>
+        <div class="actionDesc">
+            Because regulation is optional here.
+        </div>
+    </button>
+
+</div>
+
+
+<!-- ================= TRANSACTIONS ================= -->
+
+<section class="panel" style="margin-top:22px">
+
+    <div class="panelHeader">
+
+        <div>
+            <div class="panelTitle">
+                Transaction History
+            </div>
+
+            <div class="panelSubtitle">
+                Financial decisions you may regret
+            </div>
+        </div>
+
+    </div>
+
+    <div class="panelBody">
+
+        <div id="transactions">
+            <div class="transaction">
+                <div>
+                    System
+                    <small>Initial imaginary capital</small>
+                </div>
+
+                <div class="up">
+                    +₹10,000
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<footer>
+    <strong>AMMAVAN STOCK MARKET™</strong><br>
+    India's most unnecessary financial technology platform.<br>
+    No actual money. No actual stocks. No actual financial advice.<br><br>
+    Built for entertainment • 100% useless • 0% SEBI approved
+</footer>
+
+
+<!-- ================= MODAL ================= -->
+
+<div class="modal" id="tradeModal">
+
+    <div class="modalBox">
+
+        <div class="modalTitle" id="modalTitle">
+            Confirm Trade
+        </div>
+
+        <div class="modalSub" id="modalText">
+            Are you sure?
+        </div>
+
+        <div class="modalActions">
+
+            <button class="cancel" onclick="closeModal()">
+                Cancel
+            </button>
+
+            <button class="confirm" onclick="confirmTrade()">
+                Confirm
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= TOAST ================= -->
+
+<div class="toast" id="toast">
+
+    <div class="toastTitle" id="toastTitle">
+        Market Update
+    </div>
+
+    <div class="toastText" id="toastText">
+        Something happened.
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   AMMAVAN STOCK MARKET™
+   MAIN JAVASCRIPT
+========================================================= */
+
+
+/* ================= DATA ================= */
+
+const stocks = [
+
+    {
+        symbol:"GOVT",
+        name:"Government Job",
+        icon:"🏛️",
+        price:4200,
+        change:2.4
+    },
+
+    {
+        symbol:"GULF",
+        name:"Gulf Dream",
+        icon:"✈️",
+        price:3150,
+        change:-1.7
+    },
+
+    {
+        symbol:"MARR",
+        name:"Marriage Pressure",
+        icon:"💍",
+        price:2800,
+        change:4.8
+    },
+
+    {
+        symbol:"ENGG",
+        name:"Engineering Degree",
+        icon:"🎓",
+        price:1850,
+        change:-3.2
+    },
+
+    {
+        symbol:"IT",
+        name:"IT Job",
+        icon:"💻",
+        price:5600,
+        change:7.1
+    },
+
+    {
+        symbol:"REPUT",
+        name:"Family Reputation",
+        icon:"👨‍👩‍👦",
+        price:7600,
+        change:1.2
+    }
+
+];
+
+
+let balance = 10000;
+
+let holdings = {
+    GOVT:0,
+    GULF:0,
+    MARR:0,
+    ENGG:0,
+    IT:0,
+    REPUT:0
+};
+
+let transactions = [];
+
+let pendingTrade = null;
+
+let previousPortfolioValue = 10000;
+
+
+/* ================= RENDER MARKET ================= */
+
+function renderMarket(){
+
+    const body = document.getElementById("marketBody");
+
+    body.innerHTML = "";
+
+    stocks.forEach(stock => {
+
+        const row = document.createElement("tr");
+
+        const direction =
+            stock.change >= 0 ? "up" : "down";
+
+        const arrow =
+            stock.change >= 0 ? "▲" : "▼";
+
+        row.innerHTML = `
+
+            <td>
+
+                <div class="stockName">
+
+                    <div class="stockIcon">
+                        ${stock.icon}
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            ${stock.name}
+                        </strong>
+
+                        <div class="stockSymbol">
+                            ${stock.symbol}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </td>
+
+
+            <td class="price">
+                ₹${stock.price.toLocaleString("en-IN")}
+            </td>
+
+
+            <td class="${direction}">
+                ${arrow}
+                ${Math.abs(stock.change).toFixed(2)}%
+            </td>
+
+
+            <td>
+
+                <div class="tradeButtons">
+
+                    <button
+                        class="buy"
+                        onclick="openTrade('${stock.symbol}','buy')">
+                        BUY
+                    </button>
+
+                    <button
+                        class="sell"
+                        onclick="openTrade('${stock.symbol}','sell')">
+                        SELL
+                    </button>
+
+                </div>
+
+            </td>
+
+        `;
+
+        body.appendChild(row);
+
+    });
+
+}
+
+
+/* ================= PORTFOLIO ================= */
+
+function calculatePortfolioValue(){
+
+    let value = balance;
+
+    stocks.forEach(stock => {
+
+        value +=
+            holdings[stock.symbol] *
+            stock.price;
+
+    });
+
+    return value;
+
+}
+
+
+function renderPortfolio(){
+
+    const value = calculatePortfolioValue();
+
+    document.getElementById("portfolioValue").innerText =
+        "₹" + Math.round(value).toLocaleString("en-IN");
+
+
+    const pnl =
+        value - previousPortfolioValue;
+
+    const pnlElement =
+        document.getElementById("pnl");
+
+    pnlElement.innerText =
+        (pnl >= 0 ? "+" : "") +
+        "₹" +
+        Math.round(pnl).toLocaleString("en-IN");
+
+    pnlElement.className =
+        "pnlValue " +
+        (pnl >= 0 ? "up" : "down");
+
+
+    const holdingsBox =
+        document.getElementById("holdings");
+
+    holdingsBox.innerHTML = "";
+
+    stocks.forEach(stock => {
+
+        const qty =
+            holdings[stock.symbol];
+
+        if(qty <= 0) return;
+
+        const value =
+            qty * stock.price;
+
+        holdingsBox.innerHTML += `
+
+            <div class="holding">
+
+                <div>
+
+                    <div class="holdingName">
+                        ${stock.icon}
+                        ${stock.name}
+                    </div>
+
+                    <div class="holdingQty">
+                        ${qty} shares
+                    </div>
+
+                </div>
+
+                <div class="holdingValue">
+                    ₹${Math.round(value).toLocaleString("en-IN")}
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+/* ================= TRADING ================= */
+
+function openTrade(symbol,type){
+
+    const stock =
+        stocks.find(s => s.symbol === symbol);
+
+    pendingTrade = {
+        symbol,
+        type
+    };
+
+    document.getElementById("modalTitle").innerText =
+        type === "buy"
+        ? "Buy " + stock.name
+        : "Sell " + stock.name;
+
+
+    document.getElementById("modalText").innerText =
+
+        type === "buy"
+
+        ? `Buy 1 share of ${stock.name} for ₹${stock.price.toLocaleString("en-IN")}? Your Ammavan may have an opinion.`
+
+        : `Sell 1 share of ${stock.name} for ₹${stock.price.toLocaleString("en-IN")}? This decision cannot be reversed by your relatives.`;
+
+    document
+        .getElementById("tradeModal")
+        .classList.add("active");
+
+}
+
+
+function closeModal(){
+
+    document
+        .getElementById("tradeModal")
+        .classList.remove("active");
+
+    pendingTrade = null;
+
+}
+
+
+function confirmTrade(){
+
+    if(!pendingTrade) return;
+
+    const stock =
+        stocks.find(
+            s => s.symbol === pendingTrade.symbol
+        );
+
+    if(pendingTrade.type === "buy"){
+
+        if(balance < stock.price){
+
+            showToast(
+                "Insufficient Funds",
+                "Even your imaginary money is finished."
+            );
+
+            closeModal();
+            return;
+        }
+
+        balance -= stock.price;
+
+        holdings[stock.symbol]++;
+
+        addTransaction(
+            "BUY",
+            stock,
+            stock.price
+        );
+
+        showToast(
+            "Trade Executed",
+            `Bought 1 ${stock.symbol}. Ammavan approves.`
+        );
+
+    }
+
+    else{
+
+        if(holdings[stock.symbol] <= 0){
+
+            showToast(
+                "Nothing To Sell",
+                "You don't own this. Nice try."
+            );
+
+            closeModal();
+            return;
+        }
+
+        balance += stock.price;
+
+        holdings[stock.symbol]--;
+
+        addTransaction(
+            "SELL",
+            stock,
+            stock.price
+        );
+
+        showToast(
+            "Trade Executed",
+            `Sold 1 ${stock.symbol}. Probably a mistake.`
+        );
+
+    }
+
+
+    closeModal();
+
+    renderPortfolio();
+
+}
+
+
+/* ================= TRANSACTIONS ================= */
+
+function addTransaction(type,stock,amount){
+
+    transactions.unshift({
+        type,
+        stock:stock.symbol,
+        amount
+    });
+
+    renderTransactions();
+
+}
+
+
+function renderTransactions(){
+
+    const box =
+        document.getElementById("transactions");
+
+    box.innerHTML = "";
+
+    transactions.slice(0,10).forEach(tx => {
+
+        const color =
+            tx.type === "BUY"
+            ? "down"
+            : "up";
+
+        const sign =
+            tx.type === "BUY"
+            ? "-"
+            : "+";
+
+        box.innerHTML += `
+
+            <div class="transaction">
+
+                <div>
+
+                    <strong>
+                        ${tx.type} ${tx.stock}
+                    </strong>
+
+                    <small>
+                        Ammavan Exchange
+                    </small>
+
+                </div>
+
+                <div class="${color}">
+                    ${sign}₹${tx.amount.toLocaleString("en-IN")}
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+/* ================= MARKET MOVEMENT ================= */
+
+function updateMarket(){
+
+    stocks.forEach(stock => {
+
+        const movement =
+            (Math.random() - .48) * 4;
+
+        stock.change = movement;
+
+        stock.price *=
+            1 + movement / 100;
+
+        stock.price =
+            Math.max(100,Math.round(stock.price));
+
+    });
+
+
+    renderMarket();
+
+    renderPortfolio();
+
+    updateIndex();
+
+}
+
+
+/* ================= MARKET INDEX ================= */
+
+function updateIndex(){
+
+    const average =
+        stocks.reduce(
+            (sum,s) => sum + s.change,
+            0
+        ) / stocks.length;
+
+    const element =
+        document.getElementById("indexValue");
+
+    element.innerText =
+        (average >= 0 ? "+" : "") +
+        average.toFixed(2) +
+        "%";
+
+    element.className =
+        average >= 0 ? "up" : "down";
+
+}
+
+
+/* ================= MARKET CRASH ================= */
+
+function marketCrash(){
+
+    stocks.forEach(stock => {
+
+        stock.change =
+            -(Math.random()*15 + 5);
+
+        stock.price *=
+            1 + stock.change / 100;
+
+        stock.price =
+            Math.max(100,Math.round(stock.price));
+
+    });
+
+
+    ammavanSpeak(
+        "I told everyone not to invest. Nobody listens to me."
+    );
+
+    showToast(
+        "📉 MARKET CRASH",
+        "₹₹₹ disappeared for absolutely no reason."
+    );
+
+    renderMarket();
+    renderPortfolio();
+    updateIndex();
+
+}
+
+
+/* ================= MARKET BOOM ================= */
+
+function marketBoom(){
+
+    stocks.forEach(stock => {
+
+        stock.change =
+            Math.random()*18 + 5;
+
+        stock.price *=
+            1 + stock.change / 100;
+
+        stock.price =
+            Math.round(stock.price);
+
+    });
+
+
+    ammavanSpeak(
+        "See? I told you I understand the market."
+    );
+
+    showToast(
+        "🚀 ARTIFICIAL BULL RUN",
+        "Everyone is suddenly a financial expert."
+    );
+
+    renderMarket();
+    renderPortfolio();
+    updateIndex();
+
+}
+
+
+/* ================= MARKET MANIPULATION ================= */
+
+function manipulateMarket(){
+
+    const stock =
+        stocks[
+            Math.floor(
+                Math.random()*stocks.length
+            )
+        ];
+
+    const amount =
+        Math.random() > .5
+        ? 25
+        : -25;
+
+    stock.change = amount;
+
+    stock.price *=
+        1 + amount/100;
+
+    stock.price =
+        Math.max(100,Math.round(stock.price));
+
+
+    ammavanSpeak(
+        `"${stock.name}" is ${amount > 0 ? "going to the moon" : "finished"}. I cannot explain why.`
+    );
+
+
+    showToast(
+        "🕴️ MARKET MANIPULATED",
+        `${stock.symbol} moved ${amount}% because Ammavan said so.`
+    );
+
+
+    renderMarket();
+    renderPortfolio();
+    updateIndex();
+
+}
+
+
+/* ================= AMMAVAN AI ================= */
+
+const quotes = [
+
+    "Government job stock is always safe. Don't listen to these startup people.",
+
+    "If the share price is falling, simply don't look at it.",
+
+    "My friend's son bought crypto. Now nobody knows where he is.",
+
+    "Marriage pressure is a long-term investment.",
+
+    "Engineering degree stock is down. Very normal situation.",
+
+    "Gulf stock has excellent historical performance. Ask anyone from 1998.",
+
+    "IT job is risky. One day work from home, next day work from office.",
+
+    "Why invest in stocks when you can buy land?",
+
+    "Your portfolio looks good. But have you considered a government job?",
+
+    "Don't worry about diversification. Just buy what your cousin bought.",
+
+    "The market will recover. I saw it in a YouTube video.",
+
+    "You should invest in something stable. Like gold. Or my advice.",
+
+    "This market is unpredictable. Unlike marriage. That is also unpredictable.",
+
+    "Sell everything and open a supermarket. Much safer."
+];
+
+
+function ammavanSpeak(text){
+
+    document.getElementById("ammavanQuote").innerText =
+        "“" + text + "”";
+
+}
+
+
+function randomAmmavanQuote(){
+
+    const quote =
+        quotes[
+            Math.floor(
+                Math.random()*quotes.length
+            )
+        ];
+
+    ammavanSpeak(quote);
+
+}
+
+
+/* ================= NEWS ================= */
+
+const news = [
+
+    "Local Ammavan claims he predicted today's market movement yesterday.",
+
+    "Engineering stock falls after one student asks: 'Why did I take this?'",
+
+    "Marriage Pressure index reaches all-time high after cousin gets married.",
+
+    "Government Job stock remains stable despite zero actual vacancies.",
+
+    "Gulf Dream index rises after someone posts an airport selfie.",
+
+    "IT Job stock crashes after office announces mandatory Monday meeting.",
+
+    "Family Reputation stock rises 300% after neighbour buys a new car.",
+
+    "Ammavan advises everyone to sell immediately. Nobody knows what to sell.",
+
+    "One investor claims his portfolio is profitable. Family refuses to believe him.",
+
+    "Market analysts confirm that absolutely nobody understands this market."
+];
+
+
+function renderNews(){
+
+    const list =
+        document.getElementById("newsList");
+
+    list.innerHTML = "";
+
+    const selected =
+        [...news]
+        .sort(() => Math.random()-.5)
+        .slice(0,4);
+
+    selected.forEach(item => {
+
+        list.innerHTML += `
+
+            <div class="news">
+
+                <div class="newsTag">
+                    BREAKING
+                </div>
+
+                <div class="newsText">
+                    ${item}
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+/* ================= TOAST ================= */
+
+let toastTimer;
+
+function showToast(title,text){
+
+    const toast =
+        document.getElementById("toast");
+
+    document.getElementById("toastTitle")
+        .innerText = title;
+
+    document.getElementById("toastText")
+        .innerText = text;
+
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer =
+        setTimeout(() => {
+
+            toast.classList.remove("show");
+
+        },3500);
+
+}
+
+
+/* ================= CLOCK ================= */
+
+function updateClock(){
+
+    const now = new Date();
+
+    const time =
+        now.toLocaleTimeString(
+            "en-IN",
+            {
+                hour12:false
+            }
+        );
+
+    document.getElementById("clock")
+        .innerText = time;
+
+}
+
+
+/* ================= CHART ================= */
+
+const canvas =
+    document.getElementById("chart");
+
+const ctx =
+    canvas.getContext("2d");
+
+let chartData = [];
+
+for(let i=0;i<80;i++){
+
+    chartData.push(
+        100 +
+        Math.random()*10 +
+        i*.35
+    );
+
+}
+
+
+function drawChart(){
+
+    const rect =
+        canvas.getBoundingClientRect();
+
+    const dpr =
+        window.devicePixelRatio || 1;
+
+    canvas.width =
+        rect.width*dpr;
+
+    canvas.height =
+        rect.height*dpr;
+
+    ctx.scale(dpr,dpr);
+
+    const width = rect.width;
+    const height = rect.height;
+
+    ctx.clearRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    /* GRID */
+
+    ctx.strokeStyle =
+        "rgba(255,255,255,.05)";
+
+    ctx.lineWidth = 1;
+
+    for(let i=1;i<5;i++){
+
+        const y =
+            height/5*i;
+
+        ctx.beginPath();
+
+        ctx.moveTo(0,y);
+        ctx.lineTo(width,y);
+
+        ctx.stroke();
+
+    }
+
+
+    /* LINE */
+
+    const max =
+        Math.max(...chartData);
+
+    const min =
+        Math.min(...chartData);
+
+    ctx.beginPath();
+
+    chartData.forEach((value,index) => {
+
+        const x =
+            index/(chartData.length-1)*width;
+
+        const y =
+            height -
+            ((value-min)/(max-min))*height*.8 -
+            height*.1;
+
+        if(index===0)
+            ctx.moveTo(x,y);
+        else
+            ctx.lineTo(x,y);
+
+    });
+
+
+    ctx.strokeStyle =
+        "#35e58a";
+
+    ctx.lineWidth = 2;
+
+    ctx.stroke();
+
+
+    /* AREA */
+
+    ctx.lineTo(width,height);
+
+    ctx.lineTo(0,height);
+
+    ctx.closePath();
+
+    const gradient =
+        ctx.createLinearGradient(
+            0,0,0,height
+        );
+
+    gradient.addColorStop(
+        0,
+        "rgba(53,229,138,.16)"
+    );
+
+    gradient.addColorStop(
+        1,
+        "rgba(53,229,138,0)"
+    );
+
+    ctx.fillStyle = gradient;
+
+    ctx.fill();
+
+}
+
+
+function updateChart(){
+
+    const last =
+        chartData[chartData.length-1];
+
+    chartData.push(
+        last + (Math.random()-.45)*3
+    );
+
+    if(chartData.length > 80)
+        chartData.shift();
+
+    drawChart();
+
+}
+
+
+/* ================= KEYBOARD ================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if(event.key === "Escape"){
+            closeModal();
+        }
+
+        if(event.key.toLowerCase() === "a"){
+            randomAmmavanQuote();
+        }
+
+        if(event.key.toLowerCase() === "c"){
+            marketCrash();
+        }
+
+        if(event.key.toLowerCase() === "b"){
+            marketBoom();
+        }
+
+    }
+);
+
+
+/* ================= START ================= */
+
+renderMarket();
+
+renderPortfolio();
+
+renderNews();
+
+drawChart();
+
+updateClock();
+
+
+setInterval(
+    updateClock,
+    1000
+);
+
+
+setInterval(
+    updateMarket,
+    5000
+);
+
+
+setInterval(
+    updateChart,
+    1200
+);
+
+
+setInterval(
+    randomAmmavanQuote,
+    9000
+);
+
+
+setInterval(
+    renderNews,
+    12000
+);
+
+
+window.addEventListener(
+    "resize",
+    drawChart
+);
+
+
+/* INITIAL MESSAGE */
+
+setTimeout(() => {
+
+    showToast(
+        "👨‍🦳 AMMAVAN ONLINE",
+        "Market is open. Please make financially questionable decisions."
+    );
+
+},800);
+
+</script>
+
+</body>
+</html>
+```

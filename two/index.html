@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anti-Procrastination Slap-Bot Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 Anti-Procrastination Slap-Bot</h1>
+        <p class="subtitle">Your AI-powered motivation (pain) companion.</p>
+        
+        <div id="status-card" class="status safe">
+            <h2 id="status-text">Status: Working Hard 💻</h2>
+        </div>
+
+        <div class="controls">
+            <button id="toggle-btn" onclick="toggleBot()">Deactivate Bot</button>
+        </div>
+
+        <div class="log-box">
+            <h3>Activity Log:</h3>
+            <ul id="log-list">
+                <li>[System] Slap-Bot initialized successfully.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

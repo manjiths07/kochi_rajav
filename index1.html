@@ -1,0 +1,2320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bigg Boss Malayalam S8 — Fan Arena</title>
+
+<style>
+:root{
+    --bg:#080808;
+    --bg2:#111;
+    --card:#151515;
+    --red:#e50914;
+    --red2:#ff2433;
+    --gold:#f5c542;
+    --white:#fff;
+    --muted:#999;
+    --green:#19d37b;
+    --border:#292929;
+    --shadow:0 15px 40px rgba(0,0,0,.5);
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at top right,rgba(229,9,20,.15),transparent 30%),
+        radial-gradient(circle at top left,rgba(245,197,66,.08),transparent 25%),
+        var(--bg);
+    color:var(--white);
+    min-height:100vh;
+}
+
+button,
+input,
+textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(5,5,5,.94);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid var(--border);
+}
+
+.navbar{
+    max-width:1400px;
+    margin:auto;
+    padding:14px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo-slot{
+    width:55px;
+    height:55px;
+    border-radius:12px;
+    overflow:hidden;
+    background:#222;
+    border:1px solid #444;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.logo-slot img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+
+.logo-placeholder{
+    font-size:10px;
+    text-align:center;
+    color:#777;
+}
+
+.brand-text h1{
+    font-size:20px;
+    letter-spacing:1px;
+}
+
+.brand-text span{
+    color:var(--red2);
+}
+
+.brand-text small{
+    color:var(--muted);
+    font-size:11px;
+}
+
+nav{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+}
+
+nav button{
+    background:#171717;
+    border:1px solid #303030;
+    color:#ddd;
+    padding:9px 12px;
+    border-radius:8px;
+    transition:.2s;
+}
+
+nav button:hover{
+    background:var(--red);
+    color:white;
+    transform:translateY(-2px);
+}
+
+/* HERO */
+
+.hero{
+    min-height:540px;
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(90deg,#050505 5%,rgba(5,5,5,.75),rgba(5,5,5,.35)),
+        radial-gradient(circle at 80% 30%,rgba(229,9,20,.3),transparent 30%);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:1400px;
+    width:100%;
+    margin:auto;
+    padding:70px 25px;
+    display:grid;
+    grid-template-columns:1.4fr .6fr;
+    gap:40px;
+    align-items:center;
+}
+
+.hero h2{
+    font-size:clamp(40px,7vw,82px);
+    line-height:.95;
+    text-transform:uppercase;
+}
+
+.hero h2 span{
+    color:var(--red);
+}
+
+.hero p{
+    color:#bbb;
+    max-width:650px;
+    margin:20px 0;
+    font-size:17px;
+    line-height:1.7;
+}
+
+.live-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:#260607;
+    border:1px solid #651016;
+    color:#ff6971;
+    padding:8px 13px;
+    border-radius:30px;
+    font-size:12px;
+    margin-bottom:15px;
+}
+
+.live-dot{
+    width:8px;
+    height:8px;
+    background:red;
+    border-radius:50%;
+    box-shadow:0 0 12px red;
+    animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+    50%{opacity:.3;transform:scale(.7)}
+}
+
+.lalettan-slot{
+    min-height:360px;
+    border-radius:25px;
+    overflow:hidden;
+    border:1px solid #393939;
+    background:
+        radial-gradient(circle,rgba(229,9,20,.25),transparent 55%),
+        #111;
+    box-shadow:var(--shadow);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.lalettan-slot img{
+    width:100%;
+    height:100%;
+    min-height:360px;
+    object-fit:cover;
+}
+
+.photo-placeholder{
+    color:#777;
+    text-align:center;
+    padding:30px;
+}
+
+.container{
+    max-width:1400px;
+    margin:auto;
+    padding:30px 20px;
+}
+
+.section{
+    margin:45px 0;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:20px;
+    margin-bottom:20px;
+}
+
+.section-title h2{
+    font-size:30px;
+}
+
+.section-title p{
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* BUTTONS */
+
+.btn{
+    border:0;
+    padding:12px 18px;
+    border-radius:9px;
+    color:white;
+    background:#242424;
+    border:1px solid #3a3a3a;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn-red{
+    background:linear-gradient(135deg,#b00009,#ef1725);
+    border-color:#ff3844;
+}
+
+.btn-gold{
+    background:linear-gradient(135deg,#9b7100,#f5c542);
+    color:#111;
+    border-color:#ffd967;
+}
+
+.btn-green{
+    background:#123b2a;
+    border-color:#1a8754;
+}
+
+/* STATS */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.stat{
+    background:linear-gradient(145deg,#151515,#0e0e0e);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:22px;
+    box-shadow:var(--shadow);
+}
+
+.stat .number{
+    font-size:32px;
+    font-weight:bold;
+    margin:8px 0;
+}
+
+.stat small{
+    color:var(--muted);
+}
+
+/* CONTESTANTS */
+
+.contestant-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:15px;
+}
+
+.contestant{
+    position:relative;
+    background:linear-gradient(145deg,#181818,#0e0e0e);
+    border:1px solid var(--border);
+    border-radius:16px;
+    overflow:hidden;
+    transition:.25s;
+}
+
+.contestant:hover{
+    transform:translateY(-7px);
+    border-color:#5a5a5a;
+    box-shadow:0 20px 45px rgba(0,0,0,.6);
+}
+
+.rank{
+    position:absolute;
+    top:10px;
+    left:10px;
+    z-index:2;
+    width:35px;
+    height:35px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:50%;
+    background:#000;
+    border:1px solid var(--gold);
+    color:var(--gold);
+    font-weight:bold;
+}
+
+.contestant-photo{
+    height:230px;
+    background:#202020;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.contestant-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.contestant-placeholder{
+    color:#666;
+    text-align:center;
+    font-size:12px;
+}
+
+.contestant-info{
+    padding:15px;
+}
+
+.contestant-info h3{
+    margin-bottom:5px;
+}
+
+.contestant-info small{
+    color:var(--muted);
+}
+
+.vote-bar{
+    height:6px;
+    background:#292929;
+    border-radius:10px;
+    overflow:hidden;
+    margin:13px 0;
+}
+
+.vote-fill{
+    height:100%;
+    background:linear-gradient(90deg,var(--red),var(--gold));
+}
+
+.vote-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+}
+
+.vote-count{
+    font-size:12px;
+    color:#aaa;
+}
+
+/* SEARCH */
+
+.search-box{
+    width:100%;
+    background:#121212;
+    color:white;
+    border:1px solid #333;
+    border-radius:10px;
+    padding:14px;
+    margin-bottom:20px;
+    outline:none;
+}
+
+.search-box:focus{
+    border-color:var(--red);
+}
+
+/* CONTROL ROOM */
+
+.control-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.control-card{
+    background:#101010;
+    border:1px solid var(--border);
+    padding:20px;
+    border-radius:15px;
+}
+
+.control-card h3{
+    font-size:13px;
+    color:#aaa;
+    text-transform:uppercase;
+}
+
+.control-card strong{
+    display:block;
+    font-size:30px;
+    margin-top:10px;
+}
+
+.progress{
+    height:8px;
+    background:#252525;
+    border-radius:10px;
+    overflow:hidden;
+    margin-top:12px;
+}
+
+.progress div{
+    height:100%;
+    width:50%;
+    background:linear-gradient(90deg,var(--red),var(--gold));
+}
+
+/* ACTIVITY */
+
+.activity{
+    background:#0f0f0f;
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:15px;
+    max-height:300px;
+    overflow:auto;
+}
+
+.activity-item{
+    padding:11px;
+    border-bottom:1px solid #222;
+    font-size:13px;
+    color:#bbb;
+}
+
+.activity-item:last-child{
+    border-bottom:0;
+}
+
+/* MEMES */
+
+.meme-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.meme-card{
+    background:#111;
+    border:1px solid var(--border);
+    border-radius:15px;
+    overflow:hidden;
+}
+
+.meme-card img,
+.meme-card video{
+    width:100%;
+    display:block;
+    aspect-ratio:16/10;
+    object-fit:cover;
+    background:#1a1a1a;
+}
+
+.meme-info{
+    padding:14px;
+}
+
+.meme-info h3{
+    margin-bottom:7px;
+}
+
+.meme-info p{
+    color:#888;
+    font-size:12px;
+}
+
+/* MEDIA VAULT */
+
+.vault{
+    background:
+        radial-gradient(circle at top right,rgba(229,9,20,.15),transparent 30%),
+        #101010;
+    border:1px solid #333;
+    border-radius:20px;
+    padding:25px;
+}
+
+.media-screen{
+    background:#050505;
+    border-radius:15px;
+    border:1px solid #292929;
+    min-height:320px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    margin-bottom:20px;
+}
+
+.media-screen video,
+.media-screen audio{
+    width:100%;
+    max-height:500px;
+}
+
+.media-screen audio{
+    width:90%;
+}
+
+.media-placeholder{
+    color:#666;
+    text-align:center;
+    padding:30px;
+}
+
+.media-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.media-btn{
+    padding:11px 14px;
+    background:#191919;
+    border:1px solid #333;
+    color:white;
+    border-radius:9px;
+}
+
+.media-btn:hover{
+    border-color:var(--red);
+    background:#25090b;
+}
+
+.media-help{
+    color:#777;
+    font-size:12px;
+    margin-top:18px;
+    line-height:1.6;
+}
+
+.media-input{
+    display:none;
+}
+
+.upload-label{
+    display:inline-block;
+    padding:12px 17px;
+    border-radius:9px;
+    background:#222;
+    border:1px dashed #555;
+    cursor:pointer;
+    color:#ddd;
+}
+
+/* TABLE */
+
+.table-wrap{
+    overflow-x:auto;
+    background:#101010;
+    border:1px solid var(--border);
+    border-radius:15px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:600px;
+}
+
+th,
+td{
+    padding:15px;
+    text-align:left;
+    border-bottom:1px solid #222;
+}
+
+th{
+    color:var(--gold);
+    font-size:12px;
+    text-transform:uppercase;
+}
+
+td{
+    color:#ccc;
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:#181818;
+    border:1px solid #444;
+    padding:15px 18px;
+    border-radius:10px;
+    transform:translateY(100px);
+    opacity:0;
+    transition:.3s;
+    z-index:9999;
+    box-shadow:var(--shadow);
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.8);
+    backdrop-filter:blur(8px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:5000;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(600px,100%);
+    background:#151515;
+    border:1px solid #444;
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+}
+
+.modal-box h2{
+    color:var(--gold);
+    margin-bottom:15px;
+}
+
+.modal-box p{
+    color:#aaa;
+    line-height:1.7;
+}
+
+/* FOOTER */
+
+footer{
+    border-top:1px solid var(--border);
+    padding:30px 20px;
+    text-align:center;
+    color:#666;
+    font-size:12px;
+}
+
+footer span{
+    color:var(--red);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+    .contestant-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .stats-grid,
+    .control-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:800px){
+    .hero-content{
+        grid-template-columns:1fr;
+    }
+
+    .lalettan-slot{
+        min-height:300px;
+    }
+
+    .meme-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .contestant-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    nav{
+        display:none;
+    }
+}
+
+@media(max-width:550px){
+    .stats-grid,
+    .control-grid,
+    .meme-grid,
+    .contestant-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero h2{
+        font-size:48px;
+    }
+
+    .navbar{
+        padding:10px;
+    }
+
+    .brand-text h1{
+        font-size:15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     BIGG BOSS FAN ARENA
+     MEDIA FILES GO INSIDE: media/
+====================================================== -->
+
+<header>
+<div class="navbar">
+
+    <div class="brand">
+
+        <!-- ==============================
+             BIGG BOSS LOGO SLOT
+             Put: media/bigboss-logo.png
+        =============================== -->
+
+        <div class="logo-slot">
+            <img
+                src="media/bigboss-logo.png"
+                alt="Bigg Boss Logo"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
+            >
+            <div class="logo-placeholder" style="display:none;">
+                LOGO<br>SLOT
+            </div>
+        </div>
+
+        <div class="brand-text">
+            <h1>BIGG BOSS <span>MALAYALAM</span></h1>
+            <small>FAN ARENA • SEASON 8</small>
+        </div>
+
+    </div>
+
+    <nav>
+        <button onclick="go('home')">🏠 Home</button>
+        <button onclick="go('contestants')">👥 Contestants</button>
+        <button onclick="go('leaderboard')">🏆 Leaderboard</button>
+        <button onclick="go('memes')">😂 Memes</button>
+        <button onclick="go('vault')">🎬 Meme Vault</button>
+        <button onclick="go('control')">📊 Control Room</button>
+    </nav>
+
+</div>
+</header>
+
+
+<main>
+
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<section class="hero" id="home">
+
+<div class="hero-content">
+
+<div>
+
+    <div class="live-pill">
+        <span class="live-dot"></span>
+        FAN ARENA LIVE
+    </div>
+
+    <h2>
+        BIGG BOSS<br>
+        <span>MALAYALAM</span>
+    </h2>
+
+    <p>
+        Welcome to the unofficial fan arena. Vote for your favourite
+        contestant, check the leaderboard, enjoy Lalettan memes and
+        enter the completely unnecessary Bigg Boss Control Room.
+    </p>
+
+    <button class="btn btn-red" onclick="go('contestants')">
+        🗳️ START VOTING
+    </button>
+
+    <button class="btn btn-gold" onclick="randomContestant()">
+        🎲 Surprise Me
+    </button>
+
+</div>
+
+
+<!-- ==========================================
+     LALETTAN PHOTO SLOT
+     Put: media/lalettan.png
+=========================================== -->
+
+<div class="lalettan-slot">
+
+    <img
+        src="media/lalettan.png"
+        alt="Lalettan"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
+    >
+
+    <div class="photo-placeholder" style="display:none;">
+        👑<br><br>
+        LALETTAN PHOTO SLOT<br><br>
+        Add:<br>
+        media/lalettan.png
+    </div>
+
+</div>
+
+</div>
+</section>
+
+
+<div class="container">
+
+<!-- =====================================================
+     QUICK STATS
+====================================================== -->
+
+<section class="section">
+
+<div class="section-title">
+    <div>
+        <h2>📊 Fan Arena Stats</h2>
+        <p>Completely serious unofficial statistics.</p>
+    </div>
+</div>
+
+<div class="stats-grid">
+
+    <div class="stat">
+        <small>VOTES CAST</small>
+        <div class="number" id="totalVotes">0</div>
+        <small>by imaginary fans</small>
+    </div>
+
+    <div class="stat">
+        <small>CONTESTANTS</small>
+        <div class="number">10</div>
+        <small>currently tracked</small>
+    </div>
+
+    <div class="stat">
+        <small>MEMES GENERATED</small>
+        <div class="number" id="memeCount">0</div>
+        <small>100% unnecessary</small>
+    </div>
+
+    <div class="stat">
+        <small>DRAMA LEVEL</small>
+        <div class="number" id="dramaLevel">87%</div>
+        <small>system estimate</small>
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     CONTESTANTS
+====================================================== -->
+
+<section class="section" id="contestants">
+
+<div class="section-title">
+    <div>
+        <h2>👥 Housemates</h2>
+        <p>Choose your favourite contestant.</p>
+    </div>
+</div>
+
+<input
+    class="search-box"
+    id="search"
+    placeholder="🔍 Search contestant..."
+    oninput="filterContestants()"
+>
+
+<div class="contestant-grid" id="contestantGrid"></div>
+
+</section>
+
+
+<!-- =====================================================
+     LEADERBOARD
+====================================================== -->
+
+<section class="section" id="leaderboard">
+
+<div class="section-title">
+    <div>
+        <h2>🏆 Live Fan Leaderboard</h2>
+        <p>Votes are stored locally on your browser.</p>
+    </div>
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+    <th>Rank</th>
+    <th>Contestant</th>
+    <th>Votes</th>
+    <th>Popularity</th>
+</tr>
+</thead>
+
+<tbody id="leaderboardBody"></tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     MEMES
+====================================================== -->
+
+<section class="section" id="memes">
+
+<div class="section-title">
+
+<div>
+    <h2>😂 Lalettan Meme Zone</h2>
+    <p>Add your own Lalettan memes inside the media folder.</p>
+</div>
+
+<button class="btn btn-red" onclick="randomMeme()">
+    🎲 Random Meme
+</button>
+
+</div>
+
+
+<div class="meme-grid">
+
+<!-- MEME SLOT 1 -->
+
+<div class="meme-card">
+
+<img
+    src="media/lalettan-meme1.jpg"
+    alt="Lalettan Meme 1"
+    onerror="showImagePlaceholder(this,'MEME 1 SLOT');"
+>
+
+<div class="meme-info">
+    <h3>😂 Lalettan Meme #1</h3>
+    <p>Replace media/lalettan-meme1.jpg</p>
+</div>
+
+</div>
+
+
+<!-- MEME SLOT 2 -->
+
+<div class="meme-card">
+
+<img
+    src="media/lalettan-meme2.jpg"
+    alt="Lalettan Meme 2"
+    onerror="showImagePlaceholder(this,'MEME 2 SLOT');"
+>
+
+<div class="meme-info">
+    <h3>🤣 Lalettan Meme #2</h3>
+    <p>Replace media/lalettan-meme2.jpg</p>
+</div>
+
+</div>
+
+
+<!-- MEME SLOT 3 -->
+
+<div class="meme-card">
+
+<img
+    src="media/lalettan-meme3.jpg"
+    alt="Lalettan Meme 3"
+    onerror="showImagePlaceholder(this,'MEME 3 SLOT');"
+>
+
+<div class="meme-info">
+    <h3>🔥 Lalettan Meme #3</h3>
+    <p>Replace media/lalettan-meme3.jpg</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     MEME VIDEO + AUDIO VAULT
+====================================================== -->
+
+<section class="section" id="vault">
+
+<div class="section-title">
+
+<div>
+    <h2>🎬 CINEMA MEME VAULT</h2>
+    <p>Lalettan memes, reaction videos and sound effects.</p>
+</div>
+
+</div>
+
+
+<div class="vault">
+
+<div class="media-screen" id="mediaScreen">
+
+<div class="media-placeholder" id="mediaPlaceholder">
+
+    🎬<br><br>
+    SELECT A MEME / SOUND<br><br>
+    Your media files go inside:<br>
+    <b>media/</b>
+
+</div>
+
+<video
+    id="memeVideo"
+    controls
+    playsinline
+    style="display:none;"
+></video>
+
+<audio
+    id="memeAudio"
+    controls
+    style="display:none;"
+></audio>
+
+</div>
+
+
+<div class="media-buttons" id="mediaButtons"></div>
+
+
+<br>
+
+<button class="btn btn-red" onclick="randomMedia()">
+    🎲 Random Media
+</button>
+
+<button class="btn" onclick="stopMedia()">
+    ⏹ Stop
+</button>
+
+<label class="upload-label">
+    📁 Test Local Media
+    <input
+        type="file"
+        id="localMedia"
+        class="media-input"
+        accept="video/*,audio/*"
+        multiple
+    >
+</label>
+
+
+<div class="media-help">
+
+<b>Permanent media slots:</b><br>
+
+🎬 media/meme1.mp4<br>
+🎬 media/meme2.mp4<br>
+🎬 media/meme3.mp4<br>
+🔊 media/mass.mp3<br>
+🔊 media/comedy.mp3<br>
+🔊 media/bgm.mp3<br><br>
+
+You can replace these files with your own memes/sounds.
+The "Test Local Media" button lets you test files directly
+without changing the code. Local files are temporary for that session.
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     CONTROL ROOM
+====================================================== -->
+
+<section class="section" id="control">
+
+<div class="section-title">
+
+<div>
+    <h2>📡 BIGG BOSS CONTROL ROOM</h2>
+    <p>Totally real. Definitely not fake.</p>
+</div>
+
+</div>
+
+
+<div class="control-grid">
+
+<div class="control-card">
+    <h3>Drama Level</h3>
+    <strong id="controlDrama">87%</strong>
+    <div class="progress">
+        <div id="dramaBar" style="width:87%"></div>
+    </div>
+</div>
+
+<div class="control-card">
+    <h3>House Energy</h3>
+    <strong id="energy">74%</strong>
+    <div class="progress">
+        <div id="energyBar" style="width:74%"></div>
+    </div>
+</div>
+
+<div class="control-card">
+    <h3>Mass Level</h3>
+    <strong id="mass">91%</strong>
+    <div class="progress">
+        <div id="massBar" style="width:91%"></div>
+    </div>
+</div>
+
+<div class="control-card">
+    <h3>Peace Level</h3>
+    <strong id="peace">13%</strong>
+    <div class="progress">
+        <div id="peaceBar" style="width:13%"></div>
+    </div>
+</div>
+
+</div>
+
+
+<br>
+
+
+<div class="control-grid" style="grid-template-columns:1fr 1fr;">
+
+<div class="control-card">
+
+<h3>🚨 House Status</h3>
+
+<strong id="houseStatus">
+    NORMAL
+</strong>
+
+<br>
+
+<button class="btn btn-red" onclick="triggerDrama()">
+    🚨 Trigger Drama
+</button>
+
+</div>
+
+
+<div class="control-card">
+
+<h3>📡 Live Activity</h3>
+
+<div class="activity" id="activityFeed"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     USELESSNESS / FAN SCORE
+====================================================== -->
+
+<section class="section">
+
+<div class="section-title">
+
+<div>
+    <h2>🔥 Fan Arena Meter</h2>
+    <p>Scientific accuracy: absolutely questionable.</p>
+</div>
+
+</div>
+
+
+<div class="control-grid">
+
+<div class="control-card">
+    <h3>Mass</h3>
+    <strong id="massScore">91%</strong>
+</div>
+
+<div class="control-card">
+    <h3>Cringe</h3>
+    <strong id="cringeScore">42%</strong>
+</div>
+
+<div class="control-card">
+    <h3>Drama</h3>
+    <strong id="dramaScore">87%</strong>
+</div>
+
+<div class="control-card">
+    <h3>Actual Usefulness</h3>
+    <strong style="color:var(--red)">0.00%</strong>
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</main>
+
+
+<!-- =====================================================
+     MODAL
+====================================================== -->
+
+<div class="modal" id="modal">
+
+<div class="modal-box">
+
+<h2 id="modalTitle">🏆 BIGG BOSS</h2>
+
+<p id="modalText">
+Congratulations.
+</p>
+
+<br>
+
+<button class="btn btn-red" onclick="closeModal()">
+    CLOSE
+</button>
+
+</div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div class="toast" id="toast">
+    Action completed.
+</div>
+
+
+<footer>
+
+Unofficial fan-made project •
+<span>BIGG BOSS MALAYALAM</span> •
+Made for entertainment
+
+<br><br>
+
+Use images, videos and audio that you own or have permission to use.
+
+</footer>
+
+
+<script>
+
+/* =====================================================
+   MEDIA SLOTS
+======================================================
+
+   Just put your files inside the media folder.
+
+====================================================== */
+
+const mediaLibrary = [
+
+    {
+        type:"video",
+        name:"🎬 Meme Video 1",
+        src:"media/meme1.mp4"
+    },
+
+    {
+        type:"video",
+        name:"🎬 Meme Video 2",
+        src:"media/meme2.mp4"
+    },
+
+    {
+        type:"video",
+        name:"🎬 Meme Video 3",
+        src:"media/meme3.mp4"
+    },
+
+    {
+        type:"audio",
+        name:"🔥 Mass Sound",
+        src:"media/mass.mp3"
+    },
+
+    {
+        type:"audio",
+        name:"😂 Comedy Sound",
+        src:"media/comedy.mp3"
+    },
+
+    {
+        type:"audio",
+        name:"🎵 BGM",
+        src:"media/bgm.mp3"
+    }
+
+];
+
+let localLibrary = [];
+
+
+/* =====================================================
+   CONTESTANTS
+====================================================== */
+
+const contestants = [
+
+    {
+        name:"Contestant 01",
+        tag:"Mass Player",
+        image:"",
+        votes:1200
+    },
+
+    {
+        name:"Contestant 02",
+        tag:"Silent Killer",
+        image:"",
+        votes:980
+    },
+
+    {
+        name:"Contestant 03",
+        tag:"Drama Queen",
+        image:"",
+        votes:870
+    },
+
+    {
+        name:"Contestant 04",
+        tag:"House Entertainer",
+        image:"",
+        votes:760
+    },
+
+    {
+        name:"Contestant 05",
+        tag:"Strategist",
+        image:"",
+        votes:720
+    },
+
+    {
+        name:"Contestant 06",
+        tag:"Chill Player",
+        image:"",
+        votes:650
+    },
+
+    {
+        name:"Contestant 07",
+        tag:"Wildcard",
+        image:"",
+        votes:590
+    },
+
+    {
+        name:"Contestant 08",
+        tag:"Strong Player",
+        image:"",
+        votes:530
+    },
+
+    {
+        name:"Contestant 09",
+        tag:"Entertainer",
+        image:"",
+        votes:460
+    },
+
+    {
+        name:"Contestant 10",
+        tag:"Underdog",
+        image:"",
+        votes:390
+    }
+
+];
+
+
+/* =====================================================
+   STORAGE
+====================================================== */
+
+let votes =
+    JSON.parse(localStorage.getItem("bigbossVotes")) ||
+    contestants.map(c => c.votes);
+
+let memeCount =
+    Number(localStorage.getItem("bigbossMemeCount")) || 0;
+
+
+/* =====================================================
+   NAVIGATION
+====================================================== */
+
+function go(id){
+
+    const section = document.getElementById(id);
+
+    if(section){
+        section.scrollIntoView({
+            behavior:"smooth"
+        });
+    }
+
+}
+
+
+/* =====================================================
+   TOAST
+====================================================== */
+
+function toast(message){
+
+    const el = document.getElementById("toast");
+
+    el.textContent = message;
+
+    el.classList.add("show");
+
+    setTimeout(()=>{
+        el.classList.remove("show");
+    },2200);
+
+}
+
+
+/* =====================================================
+   CONTESTANT RENDER
+====================================================== */
+
+function renderContestants(list = contestants){
+
+    const grid =
+        document.getElementById("contestantGrid");
+
+    grid.innerHTML = "";
+
+    list.forEach((contestant,index)=>{
+
+        const realIndex =
+            contestants.indexOf(contestant);
+
+        const maxVotes =
+            Math.max(...votes);
+
+        const percentage =
+            maxVotes > 0
+            ? Math.round((votes[realIndex] / maxVotes) * 100)
+            : 0;
+
+        const card =
+            document.createElement("div");
+
+        card.className = "contestant";
+
+        card.innerHTML = `
+
+            <div class="rank">
+                ${realIndex + 1}
+            </div>
+
+            <div class="contestant-photo">
+
+                ${
+                    contestant.image
+
+                    ?
+
+                    `<img src="${contestant.image}" alt="${contestant.name}">`
+
+                    :
+
+                    `
+                    <div class="contestant-placeholder">
+                        👤<br><br>
+                        PHOTO SLOT<br><br>
+                        Add contestant image
+                    </div>
+                    `
+                }
+
+            </div>
+
+            <div class="contestant-info">
+
+                <h3>${contestant.name}</h3>
+
+                <small>${contestant.tag}</small>
+
+                <div class="vote-bar">
+                    <div
+                        class="vote-fill"
+                        style="width:${percentage}%"
+                    ></div>
+                </div>
+
+                <div class="vote-row">
+
+                    <span class="vote-count">
+                        ${votes[realIndex].toLocaleString()} votes
+                    </span>
+
+                    <button
+                        class="btn btn-red"
+                        onclick="vote(${realIndex})"
+                    >
+                        ❤️ Vote
+                    </button>
+
+                </div>
+
+            </div>
+        `;
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* =====================================================
+   VOTING
+====================================================== */
+
+function vote(index){
+
+    votes[index]++;
+
+    localStorage.setItem(
+        "bigbossVotes",
+        JSON.stringify(votes)
+    );
+
+    renderContestants();
+
+    renderLeaderboard();
+
+    updateStats();
+
+    addActivity(
+        `❤️ Someone voted for ${contestants[index].name}`
+    );
+
+    toast(
+        `❤️ Vote registered for ${contestants[index].name}`
+    );
+
+}
+
+
+/* =====================================================
+   LEADERBOARD
+====================================================== */
+
+function renderLeaderboard(){
+
+    const body =
+        document.getElementById("leaderboardBody");
+
+    const sorted =
+        contestants
+        .map((c,i)=>({
+            ...c,
+            voteCount:votes[i],
+            originalIndex:i
+        }))
+        .sort((a,b)=>b.voteCount-a.voteCount);
+
+    const maxVotes =
+        sorted[0]?.voteCount || 1;
+
+    body.innerHTML = "";
+
+    sorted.forEach((contestant,index)=>{
+
+        const percentage =
+            Math.round(
+                contestant.voteCount / maxVotes * 100
+            );
+
+        body.innerHTML += `
+
+        <tr>
+
+            <td>
+                ${
+                    index === 0
+                    ? "🥇"
+                    : index === 1
+                    ? "🥈"
+                    : index === 2
+                    ? "🥉"
+                    : "#" + (index + 1)
+                }
+            </td>
+
+            <td>
+                <b>${contestant.name}</b><br>
+                <small>${contestant.tag}</small>
+            </td>
+
+            <td>
+                ${contestant.voteCount.toLocaleString()}
+            </td>
+
+            <td>
+                ${percentage}%
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+}
+
+
+/* =====================================================
+   SEARCH
+====================================================== */
+
+function filterContestants(){
+
+    const query =
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+    const filtered =
+        contestants.filter(c =>
+            c.name.toLowerCase().includes(query) ||
+            c.tag.toLowerCase().includes(query)
+        );
+
+    renderContestants(filtered);
+
+}
+
+
+/* =====================================================
+   RANDOM CONTESTANT
+====================================================== */
+
+function randomContestant(){
+
+    const random =
+        contestants[
+            Math.floor(
+                Math.random() * contestants.length
+            )
+        ];
+
+    document.getElementById("modalTitle")
+        .textContent = "🎲 RANDOM CONTESTANT";
+
+    document.getElementById("modalText")
+        .innerHTML = `
+            The system has chosen:<br><br>
+            <strong style="font-size:25px;color:#f5c542">
+                ${random.name}
+            </strong>
+            <br><br>
+            ${random.tag}
+        `;
+
+    document
+        .getElementById("modal")
+        .classList.add("show");
+
+}
+
+
+/* =====================================================
+   MEME SYSTEM
+====================================================== */
+
+function randomMeme(){
+
+    const memes = [
+        "Lalettan said: Ithokke entha mone 😂",
+        "Lalettan reaction level: MAXIMUM 🔥",
+        "Bigg Boss house entered another dimension 💀",
+        "Task kandittu system itself resigned 😂",
+        "Weekend Episode Loading... 👑",
+        "Mass aaneda! 🔥🔥🔥"
+    ];
+
+    const meme =
+        memes[
+            Math.floor(
+                Math.random() * memes.length
+            )
+        ];
+
+    memeCount++;
+
+    localStorage.setItem(
+        "bigbossMemeCount",
+        memeCount
+    );
+
+    updateStats();
+
+    document.getElementById("modalTitle")
+        .textContent = "😂 LALETTAN MEME";
+
+    document.getElementById("modalText")
+        .innerHTML = `
+            <div style="font-size:25px">
+                ${meme}
+            </div>
+        `;
+
+    document
+        .getElementById("modal")
+        .classList.add("show");
+
+    addActivity("😂 A Lalettan meme was generated");
+
+}
+
+
+/* =====================================================
+   MEDIA VAULT
+====================================================== */
+
+function renderMediaButtons(){
+
+    const container =
+        document.getElementById("mediaButtons");
+
+    container.innerHTML = "";
+
+    const allMedia = [
+        ...mediaLibrary,
+        ...localLibrary
+    ];
+
+    allMedia.forEach((item,index)=>{
+
+        const button =
+            document.createElement("button");
+
+        button.className = "media-btn";
+
+        button.textContent = item.name;
+
+        button.onclick = () => {
+            loadMedia(item);
+        };
+
+        container.appendChild(button);
+
+    });
+
+}
+
+
+function loadMedia(item){
+
+    const video =
+        document.getElementById("memeVideo");
+
+    const audio =
+        document.getElementById("memeAudio");
+
+    const placeholder =
+        document.getElementById("mediaPlaceholder");
+
+    video.pause();
+    audio.pause();
+
+    video.style.display = "none";
+    audio.style.display = "none";
+
+    placeholder.style.display = "none";
+
+    if(item.type === "video"){
+
+        video.src = item.src;
+
+        video.style.display = "block";
+
+        video.onerror = function(){
+
+            toast(
+                "⚠️ Add " + item.src
+            );
+
+        };
+
+        video.play().catch(()=>{});
+
+    }
+
+    else{
+
+        audio.src = item.src;
+
+        audio.style.display = "block";
+
+        audio.onerror = function(){
+
+            toast(
+                "⚠️ Add " + item.src
+            );
+
+        };
+
+        audio.play().catch(()=>{});
+
+    }
+
+    addActivity(
+        "🎬 Meme Vault played: " + item.name
+    );
+
+}
+
+
+function randomMedia(){
+
+    const allMedia = [
+        ...mediaLibrary,
+        ...localLibrary
+    ];
+
+    if(!allMedia.length){
+
+        toast("No media found.");
+
+        return;
+    }
+
+    const item =
+        allMedia[
+            Math.floor(
+                Math.random() * allMedia.length
+            )
+        ];
+
+    loadMedia(item);
+
+}
+
+
+function stopMedia(){
+
+    const video =
+        document.getElementById("memeVideo");
+
+    const audio =
+        document.getElementById("memeAudio");
+
+    video.pause();
+    audio.pause();
+
+    video.currentTime = 0;
+    audio.currentTime = 0;
+
+    video.style.display = "none";
+    audio.style.display = "none";
+
+    document
+        .getElementById("mediaPlaceholder")
+        .style.display = "block";
+
+    toast("⏹ Media stopped.");
+
+}
+
+
+/* =====================================================
+   LOCAL MEDIA UPLOAD
+====================================================== */
+
+document
+.getElementById("localMedia")
+.addEventListener("change",function(){
+
+    [...this.files].forEach(file=>{
+
+        const url =
+            URL.createObjectURL(file);
+
+        localLibrary.push({
+
+            type:
+                file.type.startsWith("video/")
+                ? "video"
+                : "audio",
+
+            name:
+                "📁 " + file.name,
+
+            src:url
+
+        });
+
+    });
+
+    renderMediaButtons();
+
+    toast(
+        `${this.files.length} local media file(s) added.`
+    );
+
+});
+
+
+/* =====================================================
+   CONTROL ROOM
+====================================================== */
+
+function triggerDrama(){
+
+    const drama =
+        Math.floor(
+            90 + Math.random() * 10
+        );
+
+    const energy =
+        Math.floor(
+            70 + Math.random() * 30
+        );
+
+    const peace =
+        Math.floor(
+            Math.random() * 20
+        );
+
+    document.getElementById("controlDrama")
+        .textContent = drama + "%";
+
+    document.getElementById("dramaBar")
+        .style.width = drama + "%";
+
+    document.getElementById("energy")
+        .textContent = energy + "%";
+
+    document.getElementById("energyBar")
+        .style.width = energy + "%";
+
+    document.getElementById("peace")
+        .textContent = peace + "%";
+
+    document.getElementById("peaceBar")
+        .style.width = peace + "%";
+
+    document.getElementById("dramaLevel")
+        .textContent = drama + "%";
+
+    document.getElementById("houseStatus")
+        .textContent = "🚨 DRAMA DETECTED";
+
+    document.getElementById("mass")
+        .textContent = "99%";
+
+    document.getElementById("massBar")
+        .style.width = "99%";
+
+    addActivity(
+        "🚨 CONTROL ROOM: DRAMA DETECTED"
+    );
+
+    toast(
+        "🚨 Drama successfully triggered."
+    );
+
+}
+
+
+/* =====================================================
+   ACTIVITY
+====================================================== */
+
+function addActivity(message){
+
+    const feed =
+        document.getElementById("activityFeed");
+
+    const item =
+        document.createElement("div");
+
+    item.className =
+        "activity-item";
+
+    const time =
+        new Date()
+        .toLocaleTimeString();
+
+    item.textContent =
+        `[${time}] ${message}`;
+
+    feed.prepend(item);
+
+    while(feed.children.length > 10){
+
+        feed.removeChild(
+            feed.lastChild
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   STATS
+====================================================== */
+
+function updateStats(){
+
+    const total =
+        votes.reduce(
+            (a,b)=>a+b,
+            0
+        );
+
+    document.getElementById("totalVotes")
+        .textContent =
+        total.toLocaleString();
+
+    document.getElementById("memeCount")
+        .textContent =
+        memeCount;
+
+}
+
+
+/* =====================================================
+   IMAGE PLACEHOLDER
+====================================================== */
+
+function showImagePlaceholder(
+    image,
+    text
+){
+
+    image.style.display = "none";
+
+    const parent =
+        image.parentElement;
+
+    parent.style.display = "flex";
+    parent.style.alignItems = "center";
+    parent.style.justifyContent = "center";
+    parent.style.background = "#202020";
+
+    parent.innerHTML = `
+        <div class="contestant-placeholder">
+            🖼️<br><br>
+            ${text}<br><br>
+            Add image inside media/
+        </div>
+    `;
+
+}
+
+
+/* =====================================================
+   MODAL
+====================================================== */
+
+function closeModal(){
+
+    document
+        .getElementById("modal")
+        .classList.remove("show");
+
+}
+
+
+/* =====================================================
+   RANDOM LIVE ACTIVITY
+====================================================== */
+
+const activities = [
+
+    "👀 Someone opened the leaderboard.",
+
+    "😂 Someone watched a Lalettan meme.",
+
+    "🔥 House Mass Level increased.",
+
+    "📡 Control Room is monitoring the house.",
+
+    "🗳️ New fan vote detected.",
+
+    "🎬 Meme Vault accessed.",
+
+    "🚨 Suspicious amount of drama detected.",
+
+    "👑 Weekend Episode anticipation increased.",
+
+    "💀 Someone pressed every button on the website."
+
+];
+
+
+function randomActivity(){
+
+    const message =
+        activities[
+            Math.floor(
+                Math.random() * activities.length
+            )
+        ];
+
+    addActivity(message);
+
+}
+
+
+/* =====================================================
+   STARTUP
+====================================================== */
+
+renderContestants();
+
+renderLeaderboard();
+
+renderMediaButtons();
+
+updateStats();
+
+addActivity(
+    "📡 Bigg Boss Fan Arena online."
+);
+
+addActivity(
+    "👑 Lalettan monitoring system activated."
+);
+
+addActivity(
+    "🎬 Meme Vault ready."
+);
+
+
+/* =====================================================
+   FAKE LIVE SYSTEM
+====================================================== */
+
+setInterval(()=>{
+
+    randomActivity();
+
+    const energy =
+        Math.floor(
+            65 + Math.random() * 35
+        );
+
+    document.getElementById("energy")
+        .textContent =
+        energy + "%";
+
+    document.getElementById("energyBar")
+        .style.width =
+        energy + "%";
+
+},7000);
+
+
+/* =====================================================
+   KEYBOARD SHORTCUTS
+====================================================== */
+
+document.addEventListener(
+"keydown",
+function(e){
+
+    if(e.key === "Escape"){
+
+        closeModal();
+
+    }
+
+    if(e.ctrlKey && e.key.toLowerCase() === "m"){
+
+        e.preventDefault();
+
+        randomMeme();
+
+    }
+
+});
+
+
+/* =====================================================
+   CLOSE MODAL ON BACKDROP
+====================================================== */
+
+document
+.getElementById("modal")
+.addEventListener(
+"click",
+function(e){
+
+    if(e.target === this){
+
+        closeModal();
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
